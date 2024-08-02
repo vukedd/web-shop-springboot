@@ -1,0 +1,33 @@
+#mainSectionBody {
+    background-color: #212529;
+}
+
+#header {
+    margin-top: 3%;
+}
+
+#productCard {
+	background-color: #FFFFFF;
+    padding:2%;
+}
+
+#productCard:hover {
+	background-color: #212529;
+    border: 1px solid white;
+    padding:2%;
+    color:white;
+    transition: .4s;
+    
+    #showMoreBtn{
+    	background-color: black;
+    	color:white;
+    	border:1px solid white;
+    }
+    
+    #showMoreBtn:hover{
+    	background-color: rgb(126, 126, 126);
+    	color: white;
+    	border:1px solid white;
+    	transition:.4s;
+    }
+}

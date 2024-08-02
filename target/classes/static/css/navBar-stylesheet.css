@@ -1,0 +1,50 @@
+body {
+    background-color: #212529;
+}
+
+#navBar {
+	overflow:hidden;
+    position:fixed;
+    top:0;
+    width: 100%;
+    z-index:100;
+}
+
+#mainPageNavBtn {
+    color: rgb(202, 202, 202);
+}
+
+#mainPageNavBtn:hover {
+    transition: 1s;
+    color:white;
+}
+
+#mainPageProductBtn {
+    color: rgb(202, 202, 202);
+}
+
+#mainPageProductBtn:hover {
+    transition: 1s;
+    color:white;
+}
+
+#mainPageAboutBtn {
+    color: rgb(202, 202, 202);
+}
+
+#mainPageAboutBtn:hover {
+    transition: 1s;
+    color:white;
+}
+
+#navbarSupportedContent {
+    z-index: 2;
+}
+
+#navBarPic {
+    z-index:1;
+}
+
+#navBarList {
+    padding-right: 120px;
+}
