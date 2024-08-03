@@ -9,4 +9,5 @@ import com.webshop.main.models.Product;
 @Service
 public interface ProductService {
 	List<Product> findAllProducts();
+	Product findProductById(Long id);
 }

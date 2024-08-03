@@ -7,6 +7,44 @@
     <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body layout:fragment="body"></body>
-
+<html lang="en" xmlns:th="http://thymeleaforg" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" id="navBar" data-bs-theme="dark" th:fragment="navbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" th:href="@{/}" id="navBarPic">WebShop</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-center"
+				id="navbarSupportedContent">
+				<ul class="navbar-nav mb-2 mb-lg-0" id="navBarList">
+					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
+						aria-current="page" th:href="@{/}" id="mainPageNavBtn">Home</a></li>
+					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
+						href="#" id="mainPageProductBtn">Products</a></li>
+					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
+						href="#" id="mainPageAboutBtn">About us</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div layout:fragment="body"> </div>
+	<footer class="py-5 bg-dark" th:fragment="footer">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2023</p>
+		</div>
+	</footer>
+</body>
 </html>
