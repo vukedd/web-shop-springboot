@@ -42,12 +42,13 @@
 
 #relatedProductCard {
 	background-color: #282d31;
+	border: 1px solid rgb(141, 120, 0);
     color:white;
 }
 
 #relatedProductCard:hover {
 	background-color: #212529;
-    border: 1px solid rgb(141, 120, 0);
+    border: 2px solid rgb(141, 120, 0);
     padding:2%;
     color:white;
     transition: .4s;

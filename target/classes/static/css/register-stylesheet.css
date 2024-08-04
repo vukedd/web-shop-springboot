@@ -1,0 +1,50 @@
+#registerFormSection {
+    margin-top: 100px;
+}
+
+@media (max-width: 768px){
+    #registrationForm {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1000px){
+	#registrationForm {
+		width: 800px;
+		margin-left: 400px;
+    }
+}
+
+#un-label {
+    color: white;
+	margin-top: 20px;	    
+}
+
+#pw-label {
+	color: white;
+	margin-top: 20px;	
+}
+
+#email-label {
+	color: white;
+	margin-top: 20px;	
+}
+
+#registerBtn {
+	margin-top: 20px;	
+}
+
+#registrationFormContainer {
+	display:flex;
+	justify-content:center;
+}
+
+#registrationForm {
+   	justify-content:center;
+   	align-content:center;
+}
+
+#registerLabel {
+	color:white;
+    text-align: center;
+}
