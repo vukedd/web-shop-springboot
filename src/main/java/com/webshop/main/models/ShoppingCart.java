@@ -27,7 +27,36 @@ public class ShoppingCart {
 	private Long id;
 	private Double totalPrice;
 	private int itemCount;
+	private String sessionToken;
 	
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CartItem> cartItems = new ArrayList<>();
+    
+    public ShoppingCart addItem(CartItem item) {
+    	for (CartItem cartItem : this.cartItems) {
+    		if (cartItem.getProductId() == item.getProductId()) {
+    			cartItem.setQuantity(cartItem.getQuantity() + item.getQuantity());
+    			cartItem.setPrice(cartItem.getPrice() + (item.getPrice() * item.getQuantity()));
+    			return this;
+    		}
+    	}
+    	
+    	cartItems.add(item);
+    	totalPrice += item.getPrice() * item.getQuantity();
+    	itemCount += item.getQuantity();
+    	
+    	return this;
+    }
+    
+//    private ShoppingCart removeItem(CartItem item) {
+//    	if (!this.cartItems.contains(item)) {
+//    		return null;
+//    	}
+//    	else {
+//    		cartItems.remove(item);
+//    		totalPrice -= item.getPrice() * item.getQuantity();
+//    		itemCount -= item.getQuantity();
+//    	}
+//    	return this;
+//    }
 }

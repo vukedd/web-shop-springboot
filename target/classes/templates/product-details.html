@@ -34,13 +34,16 @@
 						href="#" id="mainPageProductBtn">Products</a></li>
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
 						href="#" id="mainPageAboutBtn">About us</a></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none"><a class="nav-link active"
+						aria-current="page" th:href="@{/register}" id="mainPageNavBtn">Register</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none">
 						<a class="nav-link active"
-						href="#" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span>0</span></a>                   	
+						href="#" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span>0</span></a>               	
 					</li>
 				</ul>         
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
-					<li class="nav-item pe-3 ps-3 ms-5 mt-1"><a class="navbar-brand" href="#"><i class="bi bi-cart" id="cartPc"></i> <span>0</span></a></li>
+					<li class="nav-item pe-3 ps-3"><a class="nav-link active" th:href="@{/register}" id="mainPageNavBtn">Register</a></li>
+					<li class="nav-item mt-1"><a class="navbar-brand" href="#"><i class="bi bi-cart" id="cartPc"></i> <span>0</span></a></li>
                 </ul>
 			</div>
 		</div>
@@ -57,11 +60,16 @@
                         </div>
                         <p class="lead" id="productDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem; max-height: 3rem;" />
-                            <button type="button" id="addToCartBtn">
+						<form method="POST" th:action="@{/products/{productId}/addToCart(productId=${product.id})}" th:object="${cartItem}">
+                            <input class="form-control text-center me-3" id="productId" name="productId" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{productId}" th:value="${product.id}"/>
+                            <input class="form-control text-center me-3" id="price" name="price" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{price}" th:value="${product.price}"/>
+                            <input class="form-control text-center me-3" id="photoUrl" name="photoUrl" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{photoUrl}" th:value="${product.photoUrl}"/>
+                            <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 3rem; max-height: 3rem;" th:field="*{quantity}"/>
+                            <button type="submit" id="addToCartBtn" class="mt-3">
                                 <i class="bi-cart-fill me-1"></i>
                                 <b>Add to cart</b>
                             </button>
+                        </form>
                         </div>
                     </div>
                 </div>

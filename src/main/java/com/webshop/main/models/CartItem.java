@@ -26,8 +26,11 @@ public class CartItem {
 	private Long productId;
 	private int quantity;
 	private double price;
+	private String photoUrl;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shopping_cart_id")
 	private ShoppingCart shoppingCart;
+    
+    	
 }
