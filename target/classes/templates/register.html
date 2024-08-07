@@ -36,25 +36,25 @@
 						href="#" id="mainPageProductBtn">Products</a></li>
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
 						href="#" id="mainPageAboutBtn">About us</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none"><a class="nav-link active"
-						aria-current="page" th:href="@{/register}" id="mainPageNavBtn">Register</a></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn1">Sign out</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none">
 						<a class="nav-link active"
 						href="#" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span>0</span></a>               	
 					</li>
 				</ul>         
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
-					<li class="nav-item pe-3 ps-3"><a class="nav-link active" th:href="@{/register}" id="mainPageNavBtn">Register</a></li>
+					<li class="nav-item pe-3 ps-3" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn">Sign in</a></li>
+					<li class="nav-item pe-3 ps-3" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn">Sign out</a></li>
 					<li class="nav-item mt-1"><a class="navbar-brand" href="#"><i class="bi bi-cart" id="cartPc"></i> <span>0</span></a></li>
                 </ul>
 			</div>
 		</div>
 	</nav>
 	<section id="registerFormSection">
-		<h1 id="registerLabel">Register</h1>
-		<div th:if="${param.success}" class="alert alert-success" id="">
-			You are registered sucessfully
-		</div>
+	<div th:if="${param.fail}" class="alert alert-danger" id="failAlert">Username or
+		Email is already taken!</div>
+		<h1 id="registerLabel">Sign up</h1>
 		<div class="container" id="registrationFormContainer">
 			<form role="form" method="post" th:action="@{/register/save}" th:object="${user}">
 				<div class="form-row" id="registrationForm">
@@ -67,11 +67,12 @@
 						<label for="email" id="email-label">E-mail: <span class="text-danger" th:if="${#fields.hasErrors('email')}"> Invalid email!</span></label> <input type="email"
 							class="form-control" id="email" name="email" placeholder="E-mail" th:field="*{email}">
 					</div>				
-					<div class="form-group col-md-6">
+					<div class="form-group col-md-6" id="pwDiv">
 						<label for="password" id="pw-label">Password: <span class="text-danger" th:if="${#fields.hasErrors('password')}"> Invalid password!</span></label> <input type="password"
 							class="form-control" id="password" name="password" placeholder="Password" th:field="*{password}">
 					</div>
-					<button type="submit" class="btn btn-primary" id="registerBtn">Register</button>
+					<span id="loginLinkText">Already have an account? <a th:href="@{/login}" id="loginLink">Sign in</a></span><br>
+					<button type="submit" class="btn btn-primary" id="registerBtn">Sign up</button>
 				</div>
 			</form>
 		</div>

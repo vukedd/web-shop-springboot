@@ -25,6 +25,42 @@ body {
     color:white;
 }
 
+#signInNavBtn {
+    color: rgb(202, 202, 202);
+}
+
+#signInNavBtn:hover {
+    transition: 1s;
+    color:white;
+}
+
+#signInNavBtn1 {
+    color: rgb(202, 202, 202);
+}
+
+#signInNavBtn1:hover {
+    transition: 1s;
+    color:white;
+}
+
+#signOutNavBtn1 {
+    color: rgb(202, 202, 202);
+}
+
+#signOutNavBtn1:hover {
+    transition: 1s;
+    color:white;
+}
+
+#signOutNavBtn {
+    color: rgb(202, 202, 202);
+}
+
+#signOutNavBtn:hover {
+    transition: 1s;
+    color:white;
+}
+
 #mainPageProductBtn {
     color: rgb(202, 202, 202);
 }

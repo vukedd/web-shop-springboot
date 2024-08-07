@@ -31,7 +31,7 @@
 }
 
 #registerBtn {
-	margin-top: 20px;	
+	margin-top: 10px;	
 }
 
 #registrationFormContainer {
@@ -47,4 +47,22 @@
 #registerLabel {
 	color:white;
     text-align: center;
+}
+
+#failAlert {
+	z-index: 3;
+	margin-top: 50px;
+}
+
+#pwDiv {
+	margin-bottom: 10px;
+}
+
+#loginLinkText {
+	color:white;
+}
+
+#loginLink {
+	color:white;
+	text-decoration: underline;
 }

@@ -16,6 +16,8 @@ import com.webshop.main.models.CartItem;
 import com.webshop.main.models.Product;
 import com.webshop.main.services.ProductService;
 
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
@@ -29,7 +31,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/")
-	public String getAllProducts(Model model) {
+	public String getAllProducts(Model model, HttpServletRequest request) {
 		List<Product> products = productService.findAllProducts();
 		model.addAttribute("products", products);
 		return "index.html";
