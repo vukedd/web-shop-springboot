@@ -43,10 +43,18 @@ public class ProductController {
 	}
 	
 	@GetMapping("/")
-	public String getAllProducts(Model model, HttpServletRequest request) {
+	public String getAllProducts(Model model, Principal principal) {
 		List<Product> products = productService.findAllProducts();
+		if (principal != null) {
+			UserEntity user = userService.findByEmail(principal.getName());
+			ShoppingCart cart = cartService.findShoppingCartByUserId(user);
+			model.addAttribute("cart", cart);
+		} else {
+			ShoppingCart cart = null;
+			model.addAttribute("cart", cart);
+		}
 		model.addAttribute("products", products);
-		return "index.html";
+		return "index";
 	}
 	
 	@GetMapping("/products/{productId}")
@@ -67,12 +75,20 @@ public class ProductController {
 		cartItem.setPhotoUrl(product.getPhotoUrl());
 		cartItem.setProductId(productId);
 		cartItem.setPrice(product.getPrice() * cartItem.getQuantity());
-		if (user != null) {
+		if (user != null && user.getShopCart() == null) {
 			ShoppingCart shopCart = new ShoppingCart();
 			user.setShopCart(shopCart);
 			user.getShopCart().addItem(cartItem);
 			cartItem.setShoppingCart(shopCart);
+			cartItem.setProductName(product.getName());
+			cartItem.setProductCategory(product.getCategory());
 			cartService.save(shopCart);
+		} else {
+			user.getShopCart().addItem(cartItem);
+			cartItem.setShoppingCart(user.getShopCart());
+			cartItem.setProductName(product.getName());
+			cartItem.setProductCategory(product.getCategory());
+			cartService.save(user.getShopCart());
 		}
 		return "redirect:/?success";
 	}

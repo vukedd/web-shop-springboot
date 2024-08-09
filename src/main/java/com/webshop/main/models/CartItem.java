@@ -26,6 +26,8 @@ public class CartItem {
 	private Long productId;
 	private int quantity;
 	private double price;
+	private String productName;
+	private String productCategory;
 	private String photoUrl;
 
     @ManyToOne(fetch = FetchType.EAGER)

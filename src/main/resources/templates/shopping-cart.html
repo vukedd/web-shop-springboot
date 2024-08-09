@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/navBar-stylesheet.css">
 <link rel="stylesheet" href="/css/product-details-stylesheet.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/css/shopping-cart.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" id="navBar"
@@ -34,22 +35,23 @@
 						href="#" id="mainPageProductBtn">Products</a></li>
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
 						href="#" id="mainPageAboutBtn">About us</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none"><a class="nav-link active"
-						aria-current="page" th:href="@{/register}" id="mainPageNavBtn">Register</a></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn1">Sign out</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none">
-						<a class="nav-link active"
-						href="#" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span>0</span></a>               	
+						<a class="nav-link active" th:href="@{/cart}" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span th:text="${cart.itemCount}">0</span></a>               	
 					</li>
 				</ul>         
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
-					<li class="nav-item pe-3 ps-3"><a class="nav-link active" th:href="@{/register}" id="mainPageNavBtn">Register</a></li>
-					<li class="nav-item mt-1"><a class="navbar-brand" href="#"><i class="bi bi-cart" id="cartPc"></i> <span>0</span></a></li>
+					<li class="nav-item pe-3 ps-3" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn">Sign in</a></li>
+					<li class="nav-item pe-3 ps-3" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn">Sign out</a></li>
+					<li class="nav-item mt-1"><a class="navbar-brand" th:href="@{/cart}"><i class="bi bi-cart" id="cartPc"></i> <span th:text="${cart.itemCount}">0</span></a></li>
                 </ul>
 			</div>
 		</div>
-	</nav>  	
-	<div class="card">
-            <div class="row">
+	</nav>
+	<section class="py-5 my-4 me-0 l-0" id="mainSection">
+	<div class="card" id="cardParent">
+            <div class="row" id="rowParent">
                 <div class="col-md-8 cart">
                     <div class="title">
                         <div class="row">
@@ -57,69 +59,41 @@
                             <div class="col align-self-center text-right text-muted">3 items</div>
                         </div>
                     </div>    
-                    <div class="row border-top border-bottom">
+                    <div class="row border-top border-bottom" th:each="cartItem: ${cart.cartItems}">
                         <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                            <div class="col-2"><img class="img-fluid" id="cartPic" th:src="${cartItem.photoUrl}"></div>
                             <div class="col">
-                                <div class="row text-muted">Shirt</div>
-                                <div class="row">Cotton T-shirt</div>
+                                <div class="row"><span id="cartItemLabel" th:text="${cartItem.productName}">Shirt</span></div>
+                                <div class="row"><span id="cartItemCategory" th:text="${cartItem.productCategory}">Shirt</span></div>
                             </div>
                             <div class="col">
-                                <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                                <a href="#" id="cartItemMinus">-</a><a href="#" th:text="${cartItem.quantity}" id="cartItemQuantity">1</a><a id="cartItemPlus" href="#">+</a>
                             </div>
-                            <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                            <div class="col"><span th:text="${cartItem.price}"></span>0 RSD</div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                            <div class="col">
-                                <div class="row text-muted">Shirt</div>
-                                <div class="row">Cotton T-shirt</div>
-                            </div>
-                            <div class="col">
-                                <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                            </div>
-                            <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                        </div>
-                    </div>
-                    <div class="row border-top border-bottom">
-                        <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                            <div class="col">
-                                <div class="row text-muted">Shirt</div>
-                                <div class="row">Cotton T-shirt</div>
-                            </div>
-                            <div class="col">
-                                <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                            </div>
-                            <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                        </div>
-                    </div>
-                    <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
                 </div>
-                <div class="col-md-4 summary">
+                <div class="col-md-4 summary" id="summary">
                     <div><h5><b>Summary</b></h5></div>
                     <hr>
                     <div class="row">
-                        <div class="col" style="padding-left:0;">ITEMS 3</div>
-                        <div class="col text-right">&euro; 132.00</div>
+                        <div class="col" style="padding-left:13px;">ITEMS 3</div>
+                        <div class="col text-right"><span th:text="${cart.totalPrice}"></span>0 RSD</div>
                     </div>
-                    <form>
-                        <p>SHIPPING</p>
-                        <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
-                        <p>GIVE CODE</p>
-                        <input id="code" placeholder="Enter your code">
-                    </form>
+                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                        <div class="col">SHIPPING</div>
+                        <div class="col text-right">350.00 RSD</div>
+                    </div>
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                         <div class="col">TOTAL PRICE</div>
-                        <div class="col text-right">&euro; 137.00</div>
+                        <div class="col text-right"><span th:text="${cart.totalPrice} + 350"></span>.00 RSD</div>
                     </div>
-                    <button class="btn">CHECKOUT</button>
+                    <button class="btn" id="checkOutBtn">CHECKOUT</button>
                 </div>
             </div>
             
         </div>
+</section>
 	<footer class="py-5 bg-dark">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your

@@ -62,6 +62,7 @@
                         <p class="lead" id="productDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                         <div class="d-flex">
 						<form method="POST" th:action="@{/products/{productId}/addToCart(productId=${product.id})}" th:object="${cartItem}">
+                            <input class="form-control text-center me-3" id="productName" name="productName" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{productName}" th:value="${product.name}"/>
                             <input class="form-control text-center me-3" id="productId" name="productId" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{productId}" th:value="${product.id}"/>
                             <input class="form-control text-center me-3" id="price" name="price" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{price}" th:value="${product.price}"/>
                             <input class="form-control text-center me-3" id="photoUrl" name="photoUrl" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{photoUrl}" th:value="${product.photoUrl}"/>

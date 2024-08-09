@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webshop.main.models.ShoppingCart;
+import com.webshop.main.models.UserEntity;
 import com.webshop.main.repositories.ShoppingCartRepository;
 import com.webshop.main.services.ProductService;
 import com.webshop.main.services.ShoppingCartService;
@@ -33,6 +34,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	@Override
 	public void save(ShoppingCart cart) {
 		cartRepo.save(cart);
+	}
+
+	@Override
+	public ShoppingCart findShoppingCartByUserId(UserEntity user) {
+		ShoppingCart userCart = cartRepo.findShoppingCartByUser(user);
+		return userCart;
 	}
 
 }

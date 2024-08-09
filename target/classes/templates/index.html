@@ -37,14 +37,13 @@
 					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn1">Sign out</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none">
-						<a class="nav-link active"
-						href="#" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span>0</span></a>               	
+						<a class="nav-link active" th:href="@{/cart}" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a>               	
 					</li>
 				</ul>         
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
 					<li class="nav-item pe-3 ps-3" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn">Sign in</a></li>
 					<li class="nav-item pe-3 ps-3" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn">Sign out</a></li>
-					<li class="nav-item mt-1"><a class="navbar-brand" href="#"><i class="bi bi-cart" id="cartPc"></i> <span>0</span></a></li>
+					<li class="nav-item mt-1"><a class="navbar-brand" th:href="@{/cart}"><i class="bi bi-cart" id="cartPc"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a></li>
                 </ul>
 			</div>
 		</div>

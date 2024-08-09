@@ -44,17 +44,15 @@ public class ShoppingCart {
     	for (CartItem cartItem : this.cartItems) {
     		if (cartItem.getProductId() == item.getProductId()) {
     			cartItem.setQuantity(cartItem.getQuantity() + item.getQuantity());
-    			cartItem.setPrice(cartItem.getPrice() + (item.getPrice() * item.getQuantity()));
-    	    	this.cartItems.add(item);
-    	    	this.totalPrice += item.getPrice() * item.getQuantity();
-    	    	this.itemCount += item.getQuantity();
+    			cartItem.setPrice(cartItem.getPrice() + (item.getPrice()));
+    	    	this.totalPrice += item.getPrice();
     			return this;
     		}
     	}
     	
     	this.cartItems.add(item);
-    	this.totalPrice += item.getPrice() * item.getQuantity();
-    	this.itemCount += item.getQuantity();
+    	this.totalPrice += item.getPrice();
+    	this.itemCount += 1;
     	
     	return this;
     }
