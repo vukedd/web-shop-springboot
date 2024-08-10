@@ -66,10 +66,9 @@
                                 <div class="row"><span id="cartItemLabel" th:text="${cartItem.productName}">Shirt</span></div>
                                 <div class="row"><span id="cartItemCategory" th:text="${cartItem.productCategory}">Shirt</span></div>
                             </div>
-                            <div class="col">
-                                <a href="#" id="cartItemMinus">-</a><a href="#" th:text="${cartItem.quantity}" id="cartItemQuantity">1</a><a id="cartItemPlus" href="#">+</a>
-                            </div>
-                            <div class="col"><span th:text="${cartItem.price}"></span>0 RSD</div>
+                            <div class="col"></div>
+                            <div class="col"><span th:text="${cartItem.price}" id="cartItemPrice"></span>0 RSD</div>
+                  			<div class="col"><a th:href="@{/cart/delete}" id="thrash-can-cart"><i class="bi bi-trash"></i></a></div>
                         </div>
                     </div>
                 </div>
@@ -80,7 +79,7 @@
                         <div class="col" style="padding-left:13px;">ITEMS 3</div>
                         <div class="col text-right"><span th:text="${cart.totalPrice}"></span>0 RSD</div>
                     </div>
-                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="row" style="border-top: 1px solid rgba(0,0,0, 1); padding: 2vh 0;">
                         <div class="col">SHIPPING</div>
                         <div class="col text-right">350.00 RSD</div>
                     </div>
@@ -100,5 +99,6 @@
 				Website 2023</p>
 		</div>
 	</footer>
+<script th:src="@{/js/cart-script.js}"></script>
 </body>
 </html>

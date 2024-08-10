@@ -51,7 +51,7 @@
 
 #checkOutBtn {
 	color: black;
-    background-color: rgb(177, 150, 1);
+    background-color: rgb(177, 150, 1);	
     font-weight: bold;
 }
 
@@ -60,4 +60,15 @@
     background-color: black;
     font-weight: bold;
     transition: .5s;
+    border: 1px solid rgb(177, 150, 1);
+}
+
+#thrash-can-cart {
+    color:rgb(189, 189, 189);
+    font-size: 22px;
+}
+
+#thrash-can-cart:hover {
+    color: white;
+    transition: .3s;
 }
