@@ -58,18 +58,31 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products/{productId}")
-	public String getProduct(@PathVariable("productId")Long productId ,Model model) {
+	public String getProduct(@PathVariable("productId")Long productId , Principal principal,Model model) {
 		Product product = productService.findProductById(productId);
 		List<Product> products = productService.findAllProducts();
 		CartItem cartItem = new CartItem();
 		model.addAttribute("cartItem", cartItem);
 		model.addAttribute("product", product);
 		model.addAttribute("products", products);
+		if (principal != null) {
+			UserEntity user = userService.findByEmail(principal.getName());
+			ShoppingCart cart = cartService.findShoppingCartByUserId(user);
+			model.addAttribute("cart", cart);
+		} else {
+			ShoppingCart cart = null;
+			model.addAttribute("cart", cart);
+		}
 		return "product-details";
 	}
 	
 	@PostMapping("/products/{productId}/addToCart")
 	public String addToCart(@Valid @ModelAttribute CartItem cartItem, Principal principal, @PathVariable("productId") Long productId, BindingResult result, Model model) {
+		
+		if (principal == null) {
+			return "redirect:/login";
+		}
+		
 		UserEntity user = userService.findByEmail(principal.getName());
 		Product product = productService.findProductById(productId);
 		cartItem.setPhotoUrl(product.getPhotoUrl());
@@ -90,6 +103,7 @@ public class ProductController {
 			cartItem.setProductCategory(product.getCategory());
 			cartService.save(user.getShopCart());
 		}
-		return "redirect:/?success";
+		
+		return "redirect:/products/{productId}?success";
 	}
 }

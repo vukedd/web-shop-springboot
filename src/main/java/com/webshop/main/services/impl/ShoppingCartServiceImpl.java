@@ -3,9 +3,12 @@ package com.webshop.main.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webshop.main.models.CartItem;
 import com.webshop.main.models.ShoppingCart;
 import com.webshop.main.models.UserEntity;
+import com.webshop.main.repositories.CartItemRepository;
 import com.webshop.main.repositories.ShoppingCartRepository;
+import com.webshop.main.services.CartItemService;
 import com.webshop.main.services.ProductService;
 import com.webshop.main.services.ShoppingCartService;
 
@@ -14,11 +17,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	@Autowired
 	ProductService productService;
 	ShoppingCartRepository cartRepo;
+	CartItemService cartItemService;
+	CartItemRepository cartItemRepository;
 	
-	public ShoppingCartServiceImpl(ProductService productService, ShoppingCartRepository cartRepo) {
+	public ShoppingCartServiceImpl(ProductService productService, ShoppingCartRepository cartRepo, CartItemService cartItemService) {
 		super();
 		this.productService = productService;
 		this.cartRepo = cartRepo;
+		this.cartItemService = cartItemService;
 	}
 	
 	@Override

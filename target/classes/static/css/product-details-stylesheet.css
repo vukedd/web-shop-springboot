@@ -66,3 +66,20 @@
     	transition:.4s;
     }
 }
+
+#inputQuantity {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#successAlert {
+	z-index: 1000;
+	animation: fadeOut 1s ease-in 1s forwards;
+	justify-content: center;
+}
+
+@keyframes fadeOut {
+	to {
+		opacity: 0;
+	}
+}

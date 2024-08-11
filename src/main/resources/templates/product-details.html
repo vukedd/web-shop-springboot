@@ -37,19 +37,19 @@
 					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn1">Sign out</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none">
-						<a class="nav-link active"
-						href="#" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span>0</span></a>               	
+						<a class="nav-link active" th:href="@{/cart}" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a>               	
 					</li>
 				</ul>         
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
 					<li class="nav-item pe-3 ps-3" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn">Sign in</a></li>
 					<li class="nav-item pe-3 ps-3" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn">Sign out</a></li>
-					<li class="nav-item mt-1"><a class="navbar-brand" href="#"><i class="bi bi-cart" id="cartPc"></i> <span>0</span></a></li>
+					<li class="nav-item mt-1"><a class="navbar-brand" th:href="@{/cart}"><i class="bi bi-cart" id="cartPc"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a></li>
                 </ul>
 			</div>
 		</div>
 	</nav>
  <section class="py-5">
+ 			<div th:if="${param.success}" class="alert alert-success" id="successAlert">Added to cart!</div>
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center" th:object="${product}">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="*{photoUrl}" alt="..." /></div>
@@ -66,7 +66,7 @@
                             <input class="form-control text-center me-3" id="productId" name="productId" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{productId}" th:value="${product.id}"/>
                             <input class="form-control text-center me-3" id="price" name="price" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{price}" th:value="${product.price}"/>
                             <input class="form-control text-center me-3" id="photoUrl" name="photoUrl" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{photoUrl}" th:value="${product.photoUrl}"/>
-                            <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 3rem; max-height: 3rem;" th:field="*{quantity}"/>
+                            <input class="form-control text-center me-3" id="inputQuantity" min="1" name="quantity" value="1" type="number" style="max-width: 3rem; max-height: 3rem;" th:field="*{quantity}"/>
                             <button type="submit" id="addToCartBtn" class="mt-3">
                                 <i class="bi-cart-fill me-1"></i>
                                 <b>Add to cart</b>

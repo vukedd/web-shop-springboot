@@ -56,4 +56,12 @@ public class ShoppingCart {
     	
     	return this;
     }
+    
+    public ShoppingCart removeItem(CartItem item) {
+    	this.cartItems.remove(item);
+    	this.totalPrice -= item.getPrice();
+    	this.itemCount -= 1;
+    	
+    	return this;
+    }
 }

@@ -7,4 +7,6 @@ import com.webshop.main.models.CartItem;
 @Service
 public interface CartItemService {
 	CartItem findCartItemById(Long id);
+	
+	void removeCartItem(CartItem cartItem);
 }
