@@ -2,6 +2,13 @@
     overflow-x: hidden;
 }
 
+@media (min-width: 768px){
+	#mtCartImg {
+		width: 50%;
+		height: 50%;
+	}
+}
+
 #cardParent {
     background-color: #212529;;
     color: white;
@@ -96,4 +103,64 @@
 
 #cardParent {
 	border: none;
+}
+
+#inputAddress {
+	width: 300px;
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-bottom:2px;
+}
+
+#lblAddress {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+#inputCity {
+	width: 300px;
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-bottom:2px;
+}
+
+#lblCity {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+#inputZIP {
+	width: 300px;
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-bottom:2px;
+}
+
+#lblZIP {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+#inputPhoneNum {
+	width: 300px;
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-bottom: 30px;
+}
+
+#lblPhoneNum {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+#inputName {
+	width: 300px;
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-bottom:2px;
+}
+
+#lblName {
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
