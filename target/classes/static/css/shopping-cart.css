@@ -164,3 +164,15 @@
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
+
+#inputEmail {
+	width: 300px;
+	border-radius: 10px;
+	margin-left: 10px;	
+	margin-bottom:2px;
+}
+
+#lblEmail {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}

@@ -48,4 +48,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		return userCart;
 	}
 
+	@Override
+	public ShoppingCart findShoppingCartById(Long cartId) {
+		ShoppingCart cart = cartRepo.findById(cartId).get();
+		return cart;
+	}
+
 }

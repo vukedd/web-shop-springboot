@@ -14,4 +14,6 @@ public interface ShoppingCartService {
 	void save(ShoppingCart cart);
 	
 	ShoppingCart findShoppingCartByUserId(UserEntity user);
+	
+	ShoppingCart findShoppingCartById(Long cartId);
 }

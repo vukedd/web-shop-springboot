@@ -16,26 +16,6 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/css/shopping-cart.css">
 </head>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-	role="dialog" aria-labelledby="exampleModalCenterTitle"
-	aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">...</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
 <body>
 	<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body"
 		id="navBar" data-bs-theme="dark">
@@ -170,52 +150,57 @@
 						</h5>
 					</div>
 					<hr>
-					<div class="row">
-						<p id="lblName">Ime i prezime:</p>
-						<input type="text" id="inputName">
-					</div>
-					<div class="row">
-						<p id="lblCity">City:</p>
-						<input type="text" id="inputCity">
-					</div>
-					<div class="row">
-						<p id="lblZIP">ZIP code:</p>
-						<input type="text" id="inputZIP">
-					</div>
-					<div class="row">
-						<p id="lblAddress">Address:</p>
-						<input type="text" id="inputAddress">
-					</div>
-					<div class="row">
-						<p id="lblPhoneNum">Phone number:</p>
-						<input type="text" id="inputPhoneNum">
-					</div>
-					<div>
-						<h5>
-							<b>Summary</b>
-						</h5>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col" style="padding-left: 13px;">
-							ITEMS <span th:text="${cart.itemCount}"></span>
+					<form th:object="${orderer}" th:action="@{/cart/{cartId}/order(cartId=${cart.id})}" method="POST">
+						<div class="row">
+							<p id="lblName">Ime i prezime:</p>
+							<input type="text" id="inputName" th:field="*{firstAndLastName}">
 						</div>
-						<div class="col text-right">
-							<span th:text="${cart.totalPrice}"></span>0 RSD
+						<div class="row">
+							<p id="lblCity">City:</p>
+							<input type="text" id="inputCity" th:field="*{city}">
 						</div>
-					</div>
-					<div class="row" style="padding: 2vh 0;">
-						<div class="col">SHIPPING</div>
-						<div class="col text-right">350.00 RSD</div>
-					</div>
-					<div class="row" style="padding: 2vh 0;">
-						<div class="col">TOTAL PRICE</div>
-						<div class="col text-right">
-							<span th:text="${cart.totalPrice} + 350"></span>.00 RSD
+						<div class="row">
+							<p id="lblZIP">ZIP code:</p>
+							<input type="text" id="inputZIP" th:field="*{zIPCode}">
 						</div>
-					</div>
-					<button class="btn" type="button" id="checkOutBtn"
-						data-toggle="modal" data-target="#exampleModalCenter">CHECKOUT</button>
+						<div class="row">
+							<p id="lblAddress">Address:</p>
+							<input type="text" id="inputAddress" th:field="*{shippingAddress}">
+						</div>
+						<div class="row">
+							<p id="lblEmail">E-mail:</p>
+							<input type="email" id="inputEmail" th:field="*{email}">
+						</div>
+						<div class="row">
+							<p id="lblPhoneNum">Phone number:</p>
+							<input type="text" id="inputPhoneNum" th:field="*{phoneNumber}">
+						</div>
+						<div>
+							<h5>
+								<b>Summary</b>
+							</h5>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col" style="padding-left: 13px;">
+								ITEMS <span th:text="${cart.itemCount}"></span>
+							</div>
+							<div class="col text-right">
+								<span th:text="${cart.totalPrice}"></span>0 RSD
+							</div>
+						</div>
+						<div class="row" style="padding: 2vh 0;">
+							<div class="col">SHIPPING</div>
+							<div class="col text-right">350.00 RSD</div>
+						</div>
+						<div class="row" style="padding: 2vh 0;">
+							<div class="col">TOTAL PRICE</div>
+							<div class="col text-right">
+								<span th:text="${cart.totalPrice} + 350"></span>.00 RSD
+							</div>
+						</div>
+						<button class="btn" type="submit" id="checkOutBtn">CHECKOUT</button>
+					</form>
 				</div>
 			</div>
 		</div>
