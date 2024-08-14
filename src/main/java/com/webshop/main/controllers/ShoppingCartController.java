@@ -59,7 +59,12 @@ public class ShoppingCartController {
 		OrdererInfo orderer = new OrdererInfo();
 		model.addAttribute("cartItem", cartItem);
 		model.addAttribute("products", products);
-		model.addAttribute("cart", cart);
+		if (cart == null) {
+			ShoppingCart newCart = new ShoppingCart();
+			model.addAttribute("cart", newCart);
+		} else {
+			model.addAttribute("cart", cart);
+		}
 		model.addAttribute("orderer", orderer);
 		return "shopping-cart";
 	}
