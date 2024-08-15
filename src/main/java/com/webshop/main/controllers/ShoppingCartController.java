@@ -19,6 +19,7 @@ import com.webshop.main.models.Product;
 import com.webshop.main.models.ShoppingCart;
 import com.webshop.main.models.UserEntity;
 import com.webshop.main.services.CartItemService;
+import com.webshop.main.services.EmailSenderService;
 import com.webshop.main.services.OrderService;
 import com.webshop.main.services.OrdererService;
 import com.webshop.main.services.ProductService;
@@ -38,16 +39,16 @@ public class ShoppingCartController {
 	private ProductService productService;
 	private OrderService orderService;
 	private OrdererService ordererService;
-	private CartItemService cartItemService;
+	private EmailSenderService emailService;
 	
-	public ShoppingCartController(CartItemService cartItemService, UserService userService, ShoppingCartService cartService, ProductService productService, OrderService orderService, OrdererService ordererService) {
+	public ShoppingCartController(EmailSenderService emailService ,UserService userService, ShoppingCartService cartService, ProductService productService, OrderService orderService, OrdererService ordererService) {
 		super();
 		this.userService = userService;
 		this.cartService = cartService;
 		this.productService = productService;
 		this.orderService = orderService;
 		this.ordererService = ordererService;
-		this.cartItemService = cartItemService;
+		this.emailService = emailService;
 	}
 
 	@GetMapping("/cart")
@@ -82,17 +83,8 @@ public class ShoppingCartController {
 		}
 		orderService.save(order);
 		
-		System.out.println(order.getOrderer().getFirstAndLastName());
-		System.out.println(order.getOrderer().getShippingAddress());
-		System.out.println(order.getOrderer().getZIPCode());
-		System.out.println(order.getOrderer().getCity());
-		System.out.println(order.getOrderer().getPhoneNumber());
-		System.out.println("----------------------------------");
-		for (OrderItem item : order.getOrderItems()) {
-			System.out.println(item.getProductName() + " Quantity: " + item.getQuantity());
-		}
-		System.out.println("-------Total Price-------------");
-		System.out.println(order.getTotalPrice());
+		emailService.sendOrdererEmail(order);
+		emailService.sendSellerEmail(order);
 		
 		user.setShopCart(null);
 		cart.setUser(null);

@@ -85,24 +85,7 @@ public class ProductController {
 		
 		UserEntity user = userService.findByEmail(principal.getName());
 		Product product = productService.findProductById(productId);
-		cartItem.setPhotoUrl(product.getPhotoUrl());
-		cartItem.setProductId(productId);
-		cartItem.setPrice(product.getPrice() * cartItem.getQuantity());
-		if (user != null && user.getShopCart() == null) {
-			ShoppingCart shopCart = new ShoppingCart();
-			user.setShopCart(shopCart);
-			user.getShopCart().addItem(cartItem);
-			cartItem.setShoppingCart(shopCart);
-			cartItem.setProductName(product.getName());
-			cartItem.setProductCategory(product.getCategory());
-			cartService.save(shopCart);
-		} else {
-			user.getShopCart().addItem(cartItem);
-			cartItem.setShoppingCart(user.getShopCart());
-			cartItem.setProductName(product.getName());
-			cartItem.setProductCategory(product.getCategory());
-			cartService.save(user.getShopCart());
-		}
+		cartService.addToShoppingCart(cartItem, product, user);
 		
 		return "redirect:/products/{productId}?success";
 	}
