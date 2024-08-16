@@ -6,6 +6,73 @@
 	flex-direction: column;
 }
 
-#formDiv {
+#colInput1 {
+	display:flex;
+	flex-direction:column;
+}
 
+#colInput2 {
+	display:flex;
+	flex-direction:column;
+}
+
+#newProductForm {
+	justify-content:center;
+}
+
+.container1 {
+	margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.column {
+    flex: 1;
+    min-width: 300px;
+}
+ 
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color:white;
+}
+ 
+input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+ 
+textarea {
+    height: 228px;
+}
+
+@media (max-width: 768px) {
+    .container1 {
+        flex-direction: column;
+        margin-left: 20px;
+    	margin-right: 20px;
+    }
+}
+
+#addNewProduct {
+	color:white;
+	margin-top: 100px;
+	text-align:center
+}
+
+#addBtn {
+	background-color: gold;
+	color: black;
+}
+
+#addBtnDiv {
+	display: flex;
+	justify-content: center;
 }

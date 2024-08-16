@@ -99,8 +99,16 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products/add")
-	public String addNewProduct(ProductDto productDto, Model model) {
+	public String newProduct(ProductDto productDto, Model model) {
 		model.addAttribute("productDto", productDto);
 		return "add-product";
+	}
+	
+	@PostMapping("/products/add/new")
+	public String addNewProduct(@ModelAttribute("product") ProductDto newProduct, Model model) {
+		Product product = productService.createProduct(newProduct);
+		model.addAttribute("newProduct", product);
+		
+		return "redirect:/products";
 	}
 }

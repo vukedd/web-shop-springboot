@@ -12,23 +12,17 @@ import com.webshop.main.services.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService{
 	private ProductRepository productRepo;
-	
-	
 
 	public ProductServiceImpl(ProductRepository productRepo) {
 		super();
 		this.productRepo = productRepo;
 	}
 
-
-
 	@Override
 	public List<Product> findAllProducts() {
 		List<Product> products = productRepo.findAll();
 		return products;
 	}
-
-
 
 	@Override
 	public Product findProductById(Long id) {
@@ -44,5 +38,11 @@ public class ProductServiceImpl implements ProductService{
 	public Product mapToProduct(ProductDto productDto) {
 		Product product = Product.builder().id(productDto.getId()).name(productDto.getName()).photoUrl(productDto.getPhotoUrl()).description(productDto.getDescription()).price(productDto.getPrice()).category(productDto.getCategory()).stockQuantity(productDto.getStockQuantity()).build();
 		return product;
+	}
+
+	@Override
+	public Product createProduct(ProductDto newProduct) {
+		Product product = mapToProduct(newProduct);
+		return productRepo.save(product);
 	}
 }

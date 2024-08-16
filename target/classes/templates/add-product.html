@@ -12,11 +12,12 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <link rel="stylesheet" href="/css/navBar-stylesheet.css">
 <link rel="stylesheet" href="/css/add-product-stylesheet.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" id="navBar"
-		data-bs-theme="dark">
+	<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body"
+		id="navBar" data-bs-theme="dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" th:href="@{/}" id="navBarPic">WebShop</a>
 			<button class="navbar-toggler" type="button"
@@ -34,22 +35,57 @@
 						th:href="@{/products}" id="mainPageProductBtn">Products</a></li>
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
 						href="#" id="mainPageAboutBtn">About us</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn1">Sign out</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none">
-						<a class="nav-link active" th:href="@{/cart}" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a>               	
-					</li>
-				</ul>         
+					<li class="nav-item pe-3 ps-3 d-lg-none"
+						sec:authorize="!isAuthenticated()"><a class="nav-link active"
+						th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none"
+						sec:authorize="isAuthenticated()"><a class="nav-link active"
+						th:href="@{/logout}" id="signOutNavBtn1">Sign out</a></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none"><a
+						class="nav-link active" th:href="@{/cart}" id="mainPageAboutBtn"><i
+							class="bi bi-cart" id="cartMobile"></i> <span
+							th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}">
+								0</span></a></li>
+				</ul>
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
-					<li class="nav-item pe-3 ps-3" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn">Sign in</a></li>
-					<li class="nav-item pe-3 ps-3" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn">Sign out</a></li>
-					<li class="nav-item mt-1"><a class="navbar-brand" th:href="@{/cart}"><i class="bi bi-cart" id="cartPc"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a></li>
-                </ul>
+					<li class="nav-item pe-3 ps-3" sec:authorize="!isAuthenticated()"><a
+						class="nav-link active" th:href="@{/login}" id="signInNavBtn">Sign
+							in</a></li>
+					<li class="nav-item pe-3 ps-3" sec:authorize="isAuthenticated()"><a
+						class="nav-link active" th:href="@{/logout}" id="signOutNavBtn">Sign
+							out</a></li>
+					<li class="nav-item mt-1"><a class="navbar-brand"
+						th:href="@{/cart}"><i class="bi bi-cart" id="cartPc"></i> <span
+							th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}">
+								0</span></a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>
- <section class="py-5">
- </section>
+	<h2 id="addNewProduct">Add new product</h2>
+	<form th:object="${productDto}" th:action="@{/products/add/new}" method="POST">
+		<div class="container1">
+			<div class="column">
+				<label for="name">Product Name:</label> 
+				<input type="text" id="name" name="name" th:field="*{name}"> 
+				<label for="description">Description:</label>
+				<textarea id="description" name="description" th:field="*{description}"></textarea>
+			</div>
+			<div class="column">
+				<label for="price">Price:</label> 
+				<input type="text" id="price" name="price" th:field="*{price}">
+				<label for="photoUrl">Photo URL:</label> 
+				<input type="text" id="photoUrl" name="photoUrl" th:field="*{photoUrl}">
+				<label for="stockQuantity">Stock Quantity:</label> 
+				<input type="text" id="stockQuantity" name="stockQuantity" th:field="*{stockQuantity}"> 
+				<label for="category">Category:</label> 
+				<input type="text" id="category" name="category" th:field="*{category}">
+			</div>
+		</div>
+		<div id="addBtnDiv">
+			<button class="btn btn-mt-auto" id="addBtn" type="submit">Add New Product</button>
+		</div>
+	</form>
 	<footer class="py-5 bg-dark">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
