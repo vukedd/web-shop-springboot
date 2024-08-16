@@ -79,6 +79,16 @@ body {
     color:white;
 }
 
+#mainPageManageProductBtn {
+	color: rgb(202, 202, 202);
+}
+
+#mainPageManageProductBtn:hover {
+    transition: 1s;
+    color:white;	
+}
+
+
 #navbarSupportedContent {
     z-index: 2;
 }

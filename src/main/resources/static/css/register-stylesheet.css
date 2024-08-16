@@ -2,9 +2,21 @@
     margin-top: 100px;
 }
 
-@media (max-width: 768px){
+@media (max-width: 1000px){
     #registrationForm {
         width: 100%;
+    }
+    
+    #username {
+    	width: 300px;
+    }
+    
+    #email {
+    	width: 300px;
+    }
+    
+    #password {
+    	width: 300px;
     }
 }
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.webshop.main.dtos.ProductDto;
 import com.webshop.main.models.Product;
 import com.webshop.main.repositories.ProductRepository;
 import com.webshop.main.services.ProductService;
@@ -35,4 +36,13 @@ public class ProductServiceImpl implements ProductService{
 		return product;
 	}
 
+	public ProductDto mapToProductDto(Product product) {
+		ProductDto productDto = ProductDto.builder().id(product.getId()).name(product.getName()).photoUrl(product.getPhotoUrl()).description(product.getDescription()).price(product.getPrice()).category(product.getCategory()).stockQuantity(product.getStockQuantity()).build();
+		return productDto;
+	}
+	
+	public Product mapToProduct(ProductDto productDto) {
+		Product product = Product.builder().id(productDto.getId()).name(productDto.getName()).photoUrl(productDto.getPhotoUrl()).description(productDto.getDescription()).price(productDto.getPrice()).category(productDto.getCategory()).stockQuantity(productDto.getStockQuantity()).build();
+		return product;
+	}
 }

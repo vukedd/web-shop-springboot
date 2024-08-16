@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.webshop.main.dtos.ProductDto;
 import com.webshop.main.models.CartItem;
 import com.webshop.main.models.Product;
 import com.webshop.main.models.ShoppingCart;
@@ -88,5 +89,18 @@ public class ProductController {
 		cartService.addToShoppingCart(cartItem, product, user);
 		
 		return "redirect:/products/{productId}?success";
+	}
+	
+	@GetMapping("/products")
+	public String manageProducts(Model model) {
+		List<Product> products = productService.findAllProducts();
+		model.addAttribute("products", products);
+		return "products";
+	}
+	
+	@GetMapping("/products/add")
+	public String addNewProduct(ProductDto productDto, Model model) {
+		model.addAttribute("productDto", productDto);
+		return "add-product";
 	}
 }

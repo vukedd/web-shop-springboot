@@ -10,3 +10,13 @@
 	color:white;
 	text-decoration: underline;
 }
+
+@media (max-width: 1000px) {
+	#username {
+		width: 300px;
+	}
+	
+	#password {
+		width: 300px;
+	}
+}

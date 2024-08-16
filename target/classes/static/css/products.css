@@ -1,0 +1,50 @@
+#showMoreBtn{
+    background-color: black;
+    color:white;
+    border:1px solid rgb(141, 120, 0);
+}
+
+#productCard {
+	background-color: #282d31;
+    border: 1px solid rgb(141, 120, 0);
+    color:white;
+}
+
+#productCard:hover {
+	background-color: #212529;
+    border: 2px solid rgb(141, 120, 0);
+    padding:2%;
+    color:white;
+    transition: .4s;
+    
+    #showMoreBtn{
+    	background-color: black;
+    	color:white;
+    	border:1px solid rgb(141, 120, 0);
+    }
+    
+    #showMoreBtn:hover{
+    	background-color: rgb(141, 120, 0);
+    	color: black;
+    	border:1px solid black;
+    	transition:.4s;
+    }
+}
+
+#manageHeader {
+	margin-top: 100px;
+	display: flex;
+	justify-content: space-around;
+}
+
+#addProductBtn {
+	color: rgb(141, 110, 0);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: black;
+}
+
+#addProductBtn:hover {
+	background-color: rgb(141, 110, 0);
+	color: black;
+}

@@ -31,7 +31,7 @@
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
 						aria-current="page" th:href="@{/}" id="mainPageNavBtn">Home</a></li>
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
-						href="#" id="mainPageProductBtn">Products</a></li>
+						th:href="@{/products}" id="mainPageProductBtn">Products</a></li>
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
 						href="#" id="mainPageAboutBtn">About us</a></li>
 					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
