@@ -1,4 +1,4 @@
-	.inputField {
+.inputField {
 	margin-bottom: 10px;
 }
  
@@ -61,21 +61,21 @@ textarea {
     }
 }
 
-#addNewProduct {
+#editProduct {
 	color:white;
 	margin-top: 100px;
 	text-align:center
 }
 
-#addBtn {
+#editBtn {
 	background-color: rgb(207, 176, 0);
 	color: black;
 }
 
-#addBtn:hover {
-	color: white;
-	border: 1px solid rgb(207, 176, 0);
+#editBtn:hover {
 	background-color: black;
+	color: white;
+	border: 1px solid white;
 	transition: .8s;
 }
 

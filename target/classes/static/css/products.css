@@ -38,13 +38,15 @@
 }
 
 #addProductBtn {
-	color: rgb(141, 110, 0);
+	color: black;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: black;
+	background-color: rgb(207, 176, 0);;
 }
 
 #addProductBtn:hover {
-	background-color: rgb(141, 110, 0);
-	color: black;
+	background-color: black;
+	color: white;
+	border: 1px solid rgb(207, 176, 0);
+	transition: .8s;
 }

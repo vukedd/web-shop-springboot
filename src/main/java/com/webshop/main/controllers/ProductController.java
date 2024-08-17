@@ -111,4 +111,19 @@ public class ProductController {
 		
 		return "redirect:/products";
 	}
+	
+	@GetMapping("/products/{productId}/edit")
+	public String editProduct(@PathVariable("productId") Long id, Model model) {
+		Product product = productService.findProductById(id);
+		model.addAttribute("product", product);
+		
+		return "edit-product";
+	}
+	
+	@PostMapping("/products/{productId}/edit")
+	public String confirmProductEdit(@PathVariable("productId") Long id, @ModelAttribute("product") Product product, Model model) {
+		product.setId(id);
+		productService.updateProduct(product);
+		return "redirect:/products?success";
+	}
 }

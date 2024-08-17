@@ -45,4 +45,9 @@ public class ProductServiceImpl implements ProductService{
 		Product product = mapToProduct(newProduct);
 		return productRepo.save(product);
 	}
+
+	@Override
+	public void updateProduct(Product product) {
+		productRepo.save(product);
+	}
 }

@@ -1,3 +1,12 @@
+@media (max-width: 768px){
+	#editProductLink {
+		margin-right: 5%;
+		margin-top: 10px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+
 #productName {
     color: white;
 }
@@ -24,7 +33,7 @@
 #addToCartBtn:hover{
     color: white;
     background-color: black;
-    transition: .4s;
+    transition: .8s;
     border-radius: 10px;
     border: 1px solid rgb(207, 176, 0);
 }
@@ -63,7 +72,7 @@
     	background-color: rgb(141, 120, 0);
     	color: black;
     	border:1px solid black;
-    	transition:.4s;
+    	transition: .4s;
     }
 }
 
@@ -82,4 +91,29 @@
 	to {
 		opacity: 0;
 	}
+}
+
+#editProductDiv {
+	margin-top: 20px;
+	display:flex;
+	justify-content: end;
+}
+
+#editProductLink {
+	margin-right: 5%;
+}
+
+#editProductBtn {
+	background-color: rgb(207, 176, 0);
+	border: 1px solid black;
+	color: black;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#editProductBtn:hover {
+	background-color: black;
+	border: 1px solid rgb(141, 120, 0);
+	color: white;
+	transition: .8s;
 }

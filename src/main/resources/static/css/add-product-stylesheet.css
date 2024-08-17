@@ -1,4 +1,4 @@
-.inputField {
+	.inputField {
 	margin-bottom: 10px;
 }
  
@@ -68,8 +68,15 @@ textarea {
 }
 
 #addBtn {
-	background-color: gold;
+	background-color: rgb(207, 176, 0);
 	color: black;
+}
+
+#addBtn:hover {
+	color: white;
+	border: 1px solid rgb(207, 176, 0);
+	background-color: black;
+	transition: .8s;
 }
 
 #addBtnDiv {

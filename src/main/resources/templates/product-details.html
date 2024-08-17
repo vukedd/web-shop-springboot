@@ -48,10 +48,13 @@
 			</div>
 		</div>
 	</nav>
- <section class="py-5">
+ <section class="py-5" th:object="${product}">
  			<div th:if="${param.success}" class="alert alert-success" id="successAlert">Added to cart!</div>
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="row gx-4 gx-lg-5 align-items-center" th:object="${product}">
+ 			 <div id="editProductDiv">
+ 				<a id="editProductLink" th:href="@{/products/{productId}/edit(productId=${product.id})}"><button type="button" class="btn btn-warning" id="editProductBtn" sec:authorize="hasAuthority('ADMIN')" style="margin-right: 10px;"><i class="bi bi-pencil-fill"></i></button></a>
+ 			</div>
+            <div class="container px-4 px-lg-5 my-3">
+                <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="*{photoUrl}" alt="..." /></div>
                     <div class="col-md-6">
                         <div class="small mb-1">SKU: BST-498</div>
