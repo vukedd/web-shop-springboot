@@ -49,8 +49,9 @@
 		</div>
 	</nav>
  <section class="py-5" th:object="${product}">
- 			<div th:if="${param.success}" class="alert alert-success" id="successAlert">Added to cart!</div>
+ 			<div th:if="${param.success}" class="alert alert-primary" id="successAlert">Added to cart!</div>
  			 <div id="editProductDiv">
+ 			  	<a id="deleteProductLink" th:href="@{/products/{productId}/delete(productId=${product.id})}"><button type="button" class="btn btn-danger" id="deleteProductBtn" sec:authorize="hasAuthority('ADMIN')" style="margin-right: 10px;"><i class="bi bi-trash3-fill"></i></button></a>
  				<a id="editProductLink" th:href="@{/products/{productId}/edit(productId=${product.id})}"><button type="button" class="btn btn-warning" id="editProductBtn" sec:authorize="hasAuthority('ADMIN')" style="margin-right: 10px;"><i class="bi bi-pencil-fill"></i></button></a>
  			</div>
             <div class="container px-4 px-lg-5 my-3">
@@ -70,7 +71,13 @@
                             <input class="form-control text-center me-3" id="price" name="price" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{price}" th:value="${product.price}"/>
                             <input class="form-control text-center me-3" id="photoUrl" name="photoUrl" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{photoUrl}" th:value="${product.photoUrl}"/>
                             <input class="form-control text-center me-3" id="inputQuantity" min="1" name="quantity" value="1" type="number" style="max-width: 3rem; max-height: 3rem;" th:field="*{quantity}"/>
-                            <button type="submit" id="addToCartBtn" class="mt-3">
+                            <div data-toggle="tooltip" data-placement="" title="Out of stock!">
+                            	<button th:if="${product.stockQuantity} <= 0" type="submit" id="addToCartBtn" class="btn mt-3 disabled">
+                                	<i class="bi-cart-fill me-1"></i>
+                                	<b>Out of Stock</b>
+                            	</button>
+                            </div>
+                            <button th:if="${product.stockQuantity} > 0" type="submit" id="addToCartBtn" class="mt-3">
                                 <i class="bi-cart-fill me-1"></i>
                                 <b>Add to cart</b>
                             </button>
@@ -83,7 +90,7 @@
         <section class="py-5 bg-dark">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4" id="relatedProductsTitle">Related products</h2>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
                     <div class="col mb-5" th:each=" product1, iterstat : ${products}" th:if="${product.id} != ${product1.id} and ${iterstat.index < 3}">
                         <div class="card h-100" id="relatedProductCard">
                             <img class="card-img-top" th:src="${product1.photoUrl}" alt="..." />

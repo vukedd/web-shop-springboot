@@ -176,3 +176,19 @@
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
+
+#successDelItemAlert {
+	top: 40;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	animation: fadeOut 1s ease-in 1s forwards;
+	text-align: center;
+}
+
+@keyframes fadeOut {
+	to {
+		opacity: 0;
+		z-index: -50;
+	}
+}

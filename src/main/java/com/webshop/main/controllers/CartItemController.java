@@ -31,6 +31,6 @@ public class CartItemController {
 		CartItem cartItem = cartItemService.findCartItemById(cartItemId);
 		ShoppingCart cart = cartItem.getShoppingCart();
 		cartItemService.removeCartItem(cartItem);
-		return "redirect:/cart";
+		return "redirect:/cart?delItem";
 	}
 }

@@ -50,6 +50,7 @@
 			</div>
 		</div>
 	</nav>
+ 	<div th:if="${param.delItem}" class="alert alert-primary" id="successDelItemAlert">Item Removed from cart!</div>
 	<section class="py-5 my-4 me-0 l-0" id="mainSection">
 		<div class="row d-flex justify-content-center" id="mtCart"
 			th:if="${cart.itemCount} < 1">

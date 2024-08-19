@@ -80,6 +80,8 @@ public class ShoppingCartController {
 		order.setUser(user);
 		for (CartItem item : cart.getCartItems()) {
 			order.addOrderItem(item);
+			Product product = productService.findProductById(item.getProductId());
+			product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
 		}
 		orderService.save(order);
 		

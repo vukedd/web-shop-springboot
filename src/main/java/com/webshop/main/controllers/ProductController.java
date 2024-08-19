@@ -109,7 +109,7 @@ public class ProductController {
 		Product product = productService.createProduct(newProduct);
 		model.addAttribute("newProduct", product);
 		
-		return "redirect:/products";
+		return "redirect:/products?success";
 	}
 	
 	@GetMapping("/products/{productId}/edit")
@@ -124,6 +124,13 @@ public class ProductController {
 	public String confirmProductEdit(@PathVariable("productId") Long id, @ModelAttribute("product") Product product, Model model) {
 		product.setId(id);
 		productService.updateProduct(product);
-		return "redirect:/products?success";
+		return "redirect:/products?editSuccess";
+	}
+	
+	@GetMapping("/products/{productId}/delete")
+	public String deleteProduct(@PathVariable("productId") Long id) {
+		Product product = productService.findProductById(id);
+		productService.deleteProduct(product);
+		return "redirect:/products?delSuccess";
 	}
 }

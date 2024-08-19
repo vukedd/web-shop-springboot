@@ -50,4 +50,9 @@ public class ProductServiceImpl implements ProductService{
 	public void updateProduct(Product product) {
 		productRepo.save(product);
 	}
+
+	@Override
+	public void deleteProduct(Product product) {
+		productRepo.delete(product);
+	}
 }

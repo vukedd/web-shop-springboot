@@ -50,14 +50,14 @@
 			</div>
 		</div>
 	</nav>
+	<div th:if="${param.logout}" class="alert alert-success" id="alertSignOutSuccess">
+		You have been signed out!
+	</div>
+	<div th:if="${param.error}" class="alert alert-danger" id="alertSignInError">
+			Invalid username or password!
+	</div>
 	<section id="registerFormSection">
 		<h1 id="registerLabel">Sign in</h1>
-		<div th:if="${param.error}" class="alert alert-danger" id="">
-			Invalid username or password!
-		</div>
-		<div th:if="${param.logout}" class="alert alert-success" id="">
-			You have been signed out!
-		</div>
 		<div class="container" id="registrationFormContainer">
 			<form role="form" method="post" th:action="@{/login}">
 				<div class="form-row" id="registrationForm">

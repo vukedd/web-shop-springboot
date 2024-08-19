@@ -48,6 +48,9 @@
 			</div>
 		</div>
 	</nav>
+		<div th:if="${param.success}" class="alert alert-success" id="successCreateAlert">New product created!</div>
+		<div th:if="${param.delSuccess}" class="alert alert-success" id="successDeleteAlert">Product successfully deleted!</div>
+		<div th:if="${param.editSuccess}" class="alert alert-success" id="successEditAlert">Product successfully edited!</div>
 		<div id="manageHeader">
 			<span></span>
 			<h3 style="color:white; margin-left: 50px;" sec:authorize="hasAuthority('ADMIN')">Products</h3>
