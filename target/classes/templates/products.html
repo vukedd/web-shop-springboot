@@ -80,6 +80,22 @@
 			</div>
 		</div>
 	</section>
+	<nav aria-label="Page navigation example" id="paginationNav">
+	  <ul class="pagination">
+	    <li class="page-item" th:if="${currentPage > 0}">
+	      <a class="page-link" th:href="@{/products(page=${currentPage - 1}, size=${12})}" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"><a class="page-link" th:id="${i == currentPage} ? 'activePagi' : ''" th:href="@{/products(page=${i}, size=${12})}"
+               th:text="${i + 1}">1</a></li>
+	    <li class="page-item">
+	      <a class="page-link" th:href="@{/products(page=${currentPage + 1}, size=${12})}" aria-label="Next" th:if="${currentPage < totalPages - 1}">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
 	<footer class="py-5 bg-dark">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your

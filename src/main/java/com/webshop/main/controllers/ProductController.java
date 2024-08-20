@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,16 +93,19 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products")
-	public String manageProducts(Model model) {
-		List<Product> products = productService.findAllProducts();
-		model.addAttribute("products", products);
+	public String manageProducts(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "12") int size, Model model) {
+		Page<Product> productPage = productService.findPaginated(page, size);
+        model.addAttribute("productPage", productPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+		model.addAttribute("products", productPage.getContent());
 		return "products";
 	}
 	
 	@GetMapping("/products/add")
 	public String newProduct(ProductDto productDto, Model model) {
 		model.addAttribute("productDto", productDto);
-		return "add-product";
+		return "product-add";
 	}
 	
 	@PostMapping("/products/add/new")
@@ -117,7 +121,7 @@ public class ProductController {
 		Product product = productService.findProductById(id);
 		model.addAttribute("product", product);
 		
-		return "edit-product";
+		return "product-edit";
 	}
 	
 	@PostMapping("/products/{productId}/edit")

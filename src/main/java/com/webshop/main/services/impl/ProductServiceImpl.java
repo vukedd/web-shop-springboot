@@ -2,6 +2,9 @@ package com.webshop.main.services.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.webshop.main.dtos.ProductDto;
@@ -54,5 +57,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void deleteProduct(Product product) {
 		productRepo.delete(product);
+	}
+
+	@Override
+	public Page<Product> findPaginated(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return productRepo.findAll(pageable);
 	}
 }

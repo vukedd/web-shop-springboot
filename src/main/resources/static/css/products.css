@@ -84,3 +84,31 @@
 		z-index: -50;
 	}
 }
+
+#paginationNav {
+	display: flex;
+	justify-content: center;
+}
+
+
+.page-link {
+	background-color: black;
+	color: white;
+	border: .5px solid rgb(141, 120, 0);
+}
+
+.page-link:hover {
+	background-color: rgb(141, 120, 0);
+	color: black;
+	border: .5px solid black;
+}
+
+#activePagi {
+	color: black;
+	background-color: rgb(141,120,0);
+}
+
+.disabledPagi:disabled {
+	background-color: gray;
+	color: black;
+}
