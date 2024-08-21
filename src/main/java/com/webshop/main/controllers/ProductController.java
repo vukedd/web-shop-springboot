@@ -103,13 +103,17 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products/add")
-	public String newProduct(ProductDto productDto, Model model) {
-		model.addAttribute("productDto", productDto);
+	public String newProduct(Model model) {
+		model.addAttribute("productDto", new ProductDto());
+		System.out.println(model.getAttribute("productDto"));
 		return "product-add";
 	}
 	
 	@PostMapping("/products/add/new")
-	public String addNewProduct(@ModelAttribute("product") ProductDto newProduct, Model model) {
+	public String addNewProduct(@Valid @ModelAttribute("product") ProductDto newProduct, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "redirect:/products/add?failure";
+		}
 		Product product = productService.createProduct(newProduct);
 		model.addAttribute("newProduct", product);
 		
@@ -119,15 +123,17 @@ public class ProductController {
 	@GetMapping("/products/{productId}/edit")
 	public String editProduct(@PathVariable("productId") Long id, Model model) {
 		Product product = productService.findProductById(id);
-		model.addAttribute("product", product);
+		ProductDto productDto = productService.mapToProductDto(product);
+		model.addAttribute("product", productDto);
 		
 		return "product-edit";
 	}
 	
 	@PostMapping("/products/{productId}/edit")
-	public String confirmProductEdit(@PathVariable("productId") Long id, @ModelAttribute("product") Product product, Model model) {
-		product.setId(id);
-		productService.updateProduct(product);
+	public String confirmProductEdit(@PathVariable("productId") Long id, @ModelAttribute ProductDto product, BindingResult result, Model model) {
+		Product newProduct = productService.mapToProduct(product);
+		newProduct.setId(id);
+		productService.updateProduct(newProduct);
 		return "redirect:/products?editSuccess";
 	}
 	

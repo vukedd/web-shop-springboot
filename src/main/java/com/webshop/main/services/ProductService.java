@@ -16,6 +16,10 @@ public interface ProductService {
 	
 	Product createProduct(ProductDto newProduct);
 	
+	ProductDto mapToProductDto(Product product);
+	
+	Product mapToProduct(ProductDto productDto);
+	
 	Page<Product> findPaginated(int page, int size);
 	
 	void updateProduct(Product product);

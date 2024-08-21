@@ -62,23 +62,25 @@
 			</div>
 		</div>
 	</nav>
+	<div th:if="${param.failure}" class="alert alert-danger" id="failureCreateAlert">Failed to create product, please check if all fields are filled in correctly!</div>
 	<h2 id="addNewProduct">Add new product</h2>
 	<form th:object="${productDto}" th:action="@{/products/add/new}" method="POST">
 		<div class="container1">
 			<div class="column">
-				<label for="name">Product Name:</label> 
+				<label for="name">Product Name:</label>
 				<input type="text" id="name" name="name" th:field="*{name}"> 
+				<span class="text-danger" th:if="${#fields.hasErrors('name')}">Invalid name!</span>
 				<label for="description">Description:</label>
 				<textarea id="description" name="description" th:field="*{description}"></textarea>
 			</div>
 			<div class="column">
-				<label for="price">Price:</label> 
+				<label for="price">Price: </label> 
 				<input type="text" id="price" name="price" th:field="*{price}">
-				<label for="photoUrl">Photo URL:</label> 
+				<label for="photoUrl">Photo URL: </label> 
 				<input type="text" id="photoUrl" name="photoUrl" th:field="*{photoUrl}">
-				<label for="stockQuantity">Stock Quantity:</label> 
+				<label for="stockQuantity">Stock Quantity: </label> 
 				<input type="text" id="stockQuantity" name="stockQuantity" th:field="*{stockQuantity}"> 
-				<label for="category">Category:</label> 
+				<label for="category">Category: </label> 
 				<input type="text" id="category" name="category" th:field="*{category}">
 			</div>
 		</div>

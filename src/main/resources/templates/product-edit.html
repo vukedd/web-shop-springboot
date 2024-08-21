@@ -62,11 +62,12 @@
 			</div>
 		</div>
 	</nav>
+	<div th:if="${param.failure}" class="alert alert-danger" id="failureCreateAlert">Failed to create product, please check if all fields are filled in correctly!</div>
 	<h2 id="editProduct">Edit product</h2>
 	<form th:object="${product}" th:action="@{/products/{productId}/edit(productId=${product.id})}" method="POST">
 		<div class="container1">
 			<div class="column">
-				<label for="name">Product Name:</label> 
+				<label for="name">Product Name:</label>
 				<input type="text" id="name" name="name" th:field="*{name}"> 
 				<label for="description">Description:</label>
 				<textarea id="description" name="description" th:field="*{description}"></textarea>
