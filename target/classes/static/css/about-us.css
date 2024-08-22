@@ -1,0 +1,182 @@
+html, body {
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+	#aboutHeader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-image: 
+			linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, #212529 100%),
+			url(../img/AboutUsPhone.jpg);
+		color: white;
+		height: 300px;
+	}
+		
+	#section1text{
+		text-align:center;
+		margin-top: 30px;
+		width: 80%;
+		margin-left: 10%;
+	}
+
+	#section1image {
+		margin-left: 10%;
+		width: 80%;
+		
+	}
+	
+	#section2content {
+		display: flex;
+		align-items: row;
+		flex-wrap: wrap;
+		margin-left: 50px;
+		margin-right: 50px;
+		color: white
+	}
+	
+	#section2text1 {
+		margin-top: 50px;
+		width: 100%;
+		text-align:center;
+	}
+
+	#section2text2 {
+		margin-top: 50px;
+		width: 100%;
+		text-align:center;
+	}
+}
+
+@media (min-width: 768px) {
+	#aboutHeader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-image: 
+        	linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, #212529 100%), url('../img/AboutUsPC.jpg');
+		color: white;
+		height: 500px;
+	}
+	
+	#section1text{
+		text-align:center;
+		margin-top: 30px;
+		width: 40%;
+	}
+
+	#section1image {
+		margin-left: 10%;
+		margin-right: 10%;
+		width: auto;
+		padding-right: 0;
+	}
+	
+	#section2content {
+		display: flex;
+		align-items: row;
+		margin-left: 30%;
+		margin-right: 30%;
+		color: white;
+		gap: 10%;
+	}
+	
+	#section2text1 {
+		margin-top: 15px;
+		width: 45%;
+		text-align:center;
+	}
+
+	#section2text2 {
+		margin-top: 15px;
+		width: 45%;
+		text-align:center;
+	}
+}
+
+#mainAbout {
+	margin-top: 50px;
+}
+
+
+#aboutHeaderPic {
+	width: 100%;
+}
+
+#section1 {
+	margin-top: 50px;
+	animation-name: slide;
+	animation-duration: 2s;
+	animation-iteration-count: 1;
+}
+
+#section1content {
+	display: flex;
+	flex-direction: row;	
+	flex-wrap: wrap;
+	width: 100%;
+	margin-top: 80px;
+}
+
+
+@keyframes slide {
+	0% {
+	    opacity: 0;
+	    transform: translateX(100vw);
+	    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+#section1Title {
+	text-align: center;
+	color: white;
+}
+
+#section2 {
+	width: 100%;
+	margin-bottom: 100px;
+}
+
+#section2title {
+	color:white;
+	text-align:center;
+	margin-top:100px;
+	animation-name: colors;
+	animation-duration: 8s;
+	animation-iteration-count: 1000;
+	font-size: 40px;
+}
+
+@keyframes colors {
+  0% {color: white;}
+  25%{color: red;}
+  50% {color: yellow;}
+  75% {color: lightBlue;}
+  100% {color: white;}
+}
+
+#section2content {
+	display: flex;
+	align-items: row;
+	flex-wrap: wrap;
+	margin-left: 10%;
+	margin-right: 10%;
+	color: white
+}
+
+#section1pic {
+	width: 100%;
+}
+
+#section3title {
+	color: white;
+	font-size: 40px;
+	text-align: center;
+	margin-bottom: 50px;
+}

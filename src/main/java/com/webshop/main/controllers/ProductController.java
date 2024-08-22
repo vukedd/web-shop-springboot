@@ -93,19 +93,35 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products")
-	public String manageProducts(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "12") int size, Model model) {
+	public String manageProducts(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "12") int size, Model model, Principal principal) {
 		Page<Product> productPage = productService.findPaginated(page, size);
         model.addAttribute("productPage", productPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
 		model.addAttribute("products", productPage.getContent());
+		if (principal != null) {
+			UserEntity user = userService.findByEmail(principal.getName());
+			ShoppingCart cart = cartService.findShoppingCartByUserId(user);
+			model.addAttribute("cart", cart);
+		} else {
+			ShoppingCart cart = null;
+			model.addAttribute("cart", cart);
+		}
 		return "products";
 	}
 	
 	@GetMapping("/products/add")
-	public String newProduct(Model model) {
+	public String newProduct(Model model, Principal principal) {
 		model.addAttribute("productDto", new ProductDto());
 		System.out.println(model.getAttribute("productDto"));
+		if (principal != null) {
+			UserEntity user = userService.findByEmail(principal.getName());
+			ShoppingCart cart = cartService.findShoppingCartByUserId(user);
+			model.addAttribute("cart", cart);
+		} else {
+			ShoppingCart cart = null;
+			model.addAttribute("cart", cart);
+		}
 		return "product-add";
 	}
 	
@@ -121,10 +137,18 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products/{productId}/edit")
-	public String editProduct(@PathVariable("productId") Long id, Model model) {
+	public String editProduct(@PathVariable("productId") Long id, Model model, Principal principal) {
 		Product product = productService.findProductById(id);
 		ProductDto productDto = productService.mapToProductDto(product);
 		model.addAttribute("product", productDto);
+		if (principal != null) {
+			UserEntity user = userService.findByEmail(principal.getName());
+			ShoppingCart cart = cartService.findShoppingCartByUserId(user);
+			model.addAttribute("cart", cart);
+		} else {
+			ShoppingCart cart = null;
+			model.addAttribute("cart", cart);
+		}
 		
 		return "product-edit";
 	}
