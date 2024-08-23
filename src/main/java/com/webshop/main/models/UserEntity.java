@@ -48,4 +48,8 @@ public class UserEntity {
 	
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<Order>();
+    
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Review> myReviews = new ArrayList<Review>();
+    
 }

@@ -86,6 +86,26 @@
                 </div>
             </div>
         </section>
+        <section class="py-5">
+        	<h2 id="reviewTitle">Reviews</h2>
+        	<div class="py-3" id="reviewContainer">
+        		<div class="review-cards" th:each="review, iterstat : ${reviews}" th:if="${iterstat.index < 2}" th:object="${review}">
+        			<div id="reviewerInfo">
+        				<img src="/img/pfpplaceholder.jpg" id="reviewerPfp">
+        				<div id="reviewerInfoChild">
+               				<h6 th:text="*{reviewer.username}">username</h6>
+        					<h6 th:text="*{rating}">rating</h6>
+        				</div>
+        			</div>
+        			<div id="reviewComment" th:text="*{comment}">
+        				aaaaaaaaaaaaaaaaaaa
+        			</div>
+        		</div>
+        	</div>
+        	<div id="showReviewsContainer">
+        		<a href="#" id="showAllLink">Show all</a>
+        	</div>
+        </section>
         <section class="py-5 bg-dark">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4" id="relatedProductsTitle">Related products</h2>
