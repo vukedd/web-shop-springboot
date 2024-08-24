@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webshop.main.dtos.ProductDto;
+import com.webshop.main.dtos.ReviewDto;
 import com.webshop.main.models.CartItem;
 import com.webshop.main.models.Product;
 import com.webshop.main.models.Review;
@@ -26,6 +27,7 @@ import com.webshop.main.models.UserEntity;
 import com.webshop.main.repositories.ProductRepository;
 import com.webshop.main.security.CustomUserDetailsService;
 import com.webshop.main.services.ProductService;
+import com.webshop.main.services.ReviewService;
 import com.webshop.main.services.ShoppingCartService;
 import com.webshop.main.services.UserService;
 
@@ -39,12 +41,14 @@ public class ProductController {
 	private ProductService productService;
 	private UserService userService;
 	private ShoppingCartService cartService;
+	private ReviewService reviewService;
 
-	public ProductController(ProductService productService, UserService userService, ShoppingCartService cartService) {
+	public ProductController(ProductService productService, UserService userService, ShoppingCartService cartService, ReviewService reviewService) {
 		super();
 		this.productService = productService;
 		this.userService = userService;
 		this.cartService = cartService;
+		this.reviewService = reviewService;
 	}
 	
 	@GetMapping("/")
@@ -63,22 +67,16 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products/{productId}")
-	public String getProduct(@PathVariable("productId")Long productId , Principal principal,Model model) {
+	public String getProduct(@PathVariable("productId")Long productId, Principal principal, Model model) {
 		Product product = productService.findProductById(productId);
 		List<Product> products = productService.findAllProducts();
 		CartItem cartItem = new CartItem();
-//		LocalDateTime now = LocalDateTime.now();
-//		Review review1 = new Review((long) 1, 5, "comment", now, userService.findByEmail(principal.getName()), product);
-//		Review review2 = new Review((long) 2, 5, "comment", now, userService.findByEmail(principal.getName()), product);
-//		Review review3 = new Review((long) 3, 5, "comment", now, userService.findByEmail(principal.getName()), product);
-//		List<Review> reviews = new ArrayList<Review>();
-//		reviews.add(review1);
-//		reviews.add(review2);
-//		reviews.add(review3);
+		List<Review> reviews = reviewService.findReviewsByProduct(product);
+		model.addAttribute("reviews", reviews);
 		model.addAttribute("cartItem", cartItem);
 		model.addAttribute("product", product);
 		model.addAttribute("products", products);
-//		model.addAttribute("reviews", reviews);
+		model.addAttribute("reviewDto", new ReviewDto());
 		if (principal != null) {
 			UserEntity user = userService.findByEmail(principal.getName());
 			ShoppingCart cart = cartService.findShoppingCartByUserId(user);

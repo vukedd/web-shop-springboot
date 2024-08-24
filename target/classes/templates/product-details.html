@@ -57,7 +57,9 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="*{photoUrl}" alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
+                        <div class="small mb-1" style="color:white;">
+                        	<span th:text="*{rating}"></span>
+                        </div>
                         <h1 class="display-5 fw-bolder" th:text="*{name}" id="productName">Shop item template</h1>
                         <div class="fs-5 mb-5" >
                             <span th:text="*{price}" class="productPrice"></span><span class="productPrice">0 RSD</span>
@@ -103,8 +105,25 @@
         		</div>
         	</div>
         	<div id="showReviewsContainer">
-        		<a href="#" id="showAllLink">Show all</a>
+        		<a th:href="@{/products/{productId}/reviews(productId=${product.Id})}" id="showAllLink">Show all</a>
         	</div>
+        </section>
+        <section>
+        	<h2 id="leaveAReviewTitle">Leave a review</h2>
+        	<form method="POST" th:action="@{/products/{productId}/newReview(productId=${product.Id})}" th:object="${reviewDto}">
+	        	<div id="newReviewContainer">
+	        		<div id="ratingContainer">
+	        			<span style="color:white;"><i class="bi bi-star" id="star1"></i><i class="bi bi-star" id="star2"></i><i class="bi bi-star" id="star3"></i><i class="bi bi-star" id="star4"></i><i class="bi bi-star" id="star5"></i></span>
+	        			<input id="ratingInput" type="hidden" th:field="*{rating}">
+	        		</div>
+	        		<div id="commentContainer">
+	        			<textarea id="commentTextArea" th:field="*{comment}"></textarea>
+	        		</div>
+	        	</div>
+	        	<div id="postButtonDiv">
+	      			<button id="postButton" type="submit">Post review</button>
+	        	</div>
+        	</form>
         </section>
         <section class="py-5 bg-dark">
             <div class="container px-4 px-lg-5 mt-5">
@@ -133,5 +152,6 @@
 				Website 2023</p>
 		</div>
 	</footer>
+	<script th:src="@{/js/review.js}"></script>
 </body>
 </html>

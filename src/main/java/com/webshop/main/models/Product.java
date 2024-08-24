@@ -31,6 +31,7 @@ public class Product {
 	private Double price;
 	private String category;
 	private int stockQuantity;
+	private Double rating;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> productReviews = new ArrayList<Review>();
