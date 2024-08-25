@@ -147,6 +147,15 @@
 	top: 40;
 }
 
+#reviewAlert {
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	animation: fadeOut 1s ease-in 1s forwards;
+	text-align: center;
+	top: 40;
+}
+
 @keyframes fadeOut {
 	to {
 		opacity: 0;

@@ -9,19 +9,16 @@ body {
 }
 
 #navBar {
-	overflow:hidden;
     position:fixed;
     top:0;
     width: 100%;
     z-index:100;
 }
 
-/* Example with increased specificity */
 .navbar {
     border-bottom: 2px solid transparent !important;
 }
 
-/* For Bootstrap navbars, you might need to target additional classes */
 .navbar.border-bottom {
     border-bottom: 2px solid transparent !important;
 }
@@ -136,4 +133,8 @@ body {
 
 #cartLink {
 	margin-top: 2px;
+}
+
+#dropdownMenu {
+	margin-right: 10px;
 }

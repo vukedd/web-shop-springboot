@@ -72,6 +72,7 @@ public class ProductController {
 		List<Product> products = productService.findAllProducts();
 		CartItem cartItem = new CartItem();
 		List<Review> reviews = reviewService.findReviewsByProduct(product);
+		System.out.println(product.getRating());
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("cartItem", cartItem);
 		model.addAttribute("product", product);

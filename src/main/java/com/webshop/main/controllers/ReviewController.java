@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,29 +35,35 @@ public class ReviewController {
 	}
 
 	@PostMapping("/products/{productId}/newReview")
-	public String postNewReview(@PathVariable("productId") Long productId, @Valid @ModelAttribute("review") ReviewDto reviewDto, Principal principal) {
+	public String postNewReview(@PathVariable("productId") Long productId, @Valid @ModelAttribute("review") ReviewDto reviewDto, BindingResult result, Principal principal) {
+		if (result.hasErrors()) {
+			return "redirect:/products/" + productId + "?invalidReview";
+		}
+		
 		Product product = productService.findProductById(productId);
 		Review review = reviewService.mapToReview(reviewDto);
 		UserEntity reviewer = userService.findByEmail(principal.getName());
 		review.setProduct(product);
 		review.setReviewer(reviewer);
+		
+		
 		reviewService.createReview(review);
 		
 		product.getProductReviews().add(review);
 		reviewer.getMyReviews().add(review);
-//		
-//		double ratingSum = 0.0;
-//		int revNum = 0;
-//		double rating = 0.0;
-//		for (Review rev : product.getProductReviews()) {
-//			ratingSum += rev.getRating();
-//			revNum += 1;
-//		}
-//		
-//		
-//		rating = ratingSum / revNum;
-//		System.out.println("123");
-//		product.setRating(rating);
+		
+		double ratingSum = 0.0;
+		int revNum = 0;
+		double rating = 0.0;
+		for (Review rev : product.getProductReviews()) {
+			ratingSum += rev.getRating();
+			revNum += 1;
+		}
+		
+		
+		rating = ratingSum / revNum;
+		product.setRating(rating);
+		productService.updateProduct(product);
 		
 		return "redirect:/products";
 	}

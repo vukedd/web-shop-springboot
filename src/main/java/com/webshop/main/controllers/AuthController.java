@@ -1,5 +1,7 @@
 package com.webshop.main.controllers;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,5 +57,10 @@ public class AuthController {
 		return "redirect:/login";
 	}
 	
-	
+	@GetMapping("/profile")
+	public String getProfile(Model model, Principal principal) {
+		UserEntity loggedInUser = userService.findByEmail(principal.getName());
+		model.addAttribute("user", loggedInUser);
+		return "profile";
+	}
 }

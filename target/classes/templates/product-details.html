@@ -12,11 +12,12 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <link rel="stylesheet" href="/css/navBar-stylesheet.css">
 <link rel="stylesheet" href="/css/product-details-stylesheet.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" id="navBar"
-		data-bs-theme="dark">
+	<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body"
+		id="navBar" data-bs-theme="dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" th:href="@{/}" id="navBarPic">WebShop</a>
 			<button class="navbar-toggler" type="button"
@@ -32,120 +33,201 @@
 						aria-current="page" th:href="@{/}" id="mainPageNavBtn">Home</a></li>
 					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
 						th:href="@{/products}" id="mainPageProductBtn">Products</a></li>
-					<li class="nav-item pe-3 ps-3"><a class="nav-link active" th:href="@{/about}" id="mainPageAboutBtn">About us</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn1">Sign in</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn1">Sign out</a></li>
-					<li class="nav-item pe-3 ps-3 d-lg-none">
-						<a class="nav-link active" th:href="@{/cart}" id="mainPageAboutBtn"><i class="bi bi-cart" id="cartMobile"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a>               	
-					</li>
-				</ul>         
+					<li class="nav-item pe-3 ps-3"><a class="nav-link active"
+						th:href="@{/about}" id="mainPageAboutBtn">About us</a></li>
+					<li class="nav-item-active dropdown pe-3 ps-3 d-lg-none"
+						sec:authorize="isAuthenticated()" id="dropdownMenu"><a
+						class="nav-link dropdown-toggle" href="#" id="accountDropdown"
+						data-bs-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Account </a>
+						<ul class="dropdown-menu dropdown-menu-end"
+							aria-labelledby="accountDropdown">
+							<li><a class="dropdown-item" th:href="@{/profile}">Profile</a>
+							</li>
+							<li><a class="dropdown-item" th:href="@{/logout}">Sign
+									out</a></li>
+						</ul></li>
+					<li class="nav-item pe-3 ps-3 d-lg-none"><a
+						class="nav-link active" th:href="@{/cart}" id="mainPageAboutBtn"><i
+							class="bi bi-cart" id="cartMobile"></i> <span
+							th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}">0</span></a></li>
+				</ul>
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex">
 					<li class="nav-item pe-3 ps-3" sec:authorize="!isAuthenticated()"><a class="nav-link active" th:href="@{/login}" id="signInNavBtn">Sign in</a></li>
-					<li class="nav-item pe-3 ps-3" sec:authorize="isAuthenticated()"><a class="nav-link active" th:href="@{/logout}" id="signOutNavBtn">Sign out</a></li>
-					<li class="nav-item mt-1"><a class="navbar-brand" th:href="@{/cart}"><i class="bi bi-cart" id="cartPc"></i> <span th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}"> 0</span></a></li>
-                </ul>
+					<li class="nav-item-active dropdown"
+						sec:authorize="isAuthenticated()" id="dropdownMenu"><a
+						class="nav-link dropdown-toggle" href="#" id="accountDropdown"
+						data-bs-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Account </a>
+						<ul class="dropdown-menu dropdown-menu-end"
+							aria-labelledby="accountDropdown">
+							<li><a class="dropdown-item" th:href="@{/profile}">Profile</a>
+							</li>
+							<li><a class="dropdown-item" th:href="@{/logout}">Sign
+									out</a></li>
+						</ul></li>
+					<li class="nav-item mt-1"><a class="navbar-brand"
+						th:href="@{/cart}"> <i class="bi bi-cart" id="cartPc"></i> <span
+							th:text="${cart != null and cart.itemCount != null ? cart.itemCount : '0'}">
+								0</span>
+					</a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>
- <section class="py-5" th:object="${product}">
- 			<div th:if="${param.success}" class="alert alert-primary" id="successAlert">Added to cart!</div>
- 			 <div id="editProductDiv">
- 			  	<a id="deleteProductLink" th:href="@{/products/{productId}/delete(productId=${product.id})}"><button type="button" class="btn btn-danger" id="deleteProductBtn" sec:authorize="hasAuthority('ADMIN')" style="margin-right: 10px;"><i class="bi bi-trash3-fill"></i></button></a>
- 				<a id="editProductLink" th:href="@{/products/{productId}/edit(productId=${product.id})}"><button type="button" class="btn btn-warning" id="editProductBtn" sec:authorize="hasAuthority('ADMIN')" style="margin-right: 10px;"><i class="bi bi-pencil-fill"></i></button></a>
- 			</div>
-            <div class="container px-4 px-lg-5 my-3">
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="*{photoUrl}" alt="..." /></div>
-                    <div class="col-md-6">
-                        <div class="small mb-1" style="color:white;">
-                        	<span th:text="*{rating}"></span>
-                        </div>
-                        <h1 class="display-5 fw-bolder" th:text="*{name}" id="productName">Shop item template</h1>
-                        <div class="fs-5 mb-5" >
-                            <span th:text="*{price}" class="productPrice"></span><span class="productPrice">0 RSD</span>
-                        </div>
-                        <p class="lead" id="productDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
-                        <div class="d-flex">
-						<form method="POST" th:action="@{/products/{productId}/addToCart(productId=${product.id})}" th:object="${cartItem}">
-                            <input class="form-control text-center me-3" id="productName" name="productName" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{productName}" th:value="${product.name}"/>
-                            <input class="form-control text-center me-3" id="productId" name="productId" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{productId}" th:value="${product.id}"/>
-                            <input class="form-control text-center me-3" id="price" name="price" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{price}" th:value="${product.price}"/>
-                            <input class="form-control text-center me-3" id="photoUrl" name="photoUrl" type="hidden" style="max-width: 3rem; max-height: 3rem;" th:field="*{photoUrl}" th:value="${product.photoUrl}"/>
-                            <input class="form-control text-center me-3" id="inputQuantity" min="1" name="quantity" value="1" type="number" style="max-width: 3rem; max-height: 3rem;" th:field="*{quantity}"/>
-                            <div data-toggle="tooltip" data-placement="" title="Out of stock!">
-                            	<button th:if="${product.stockQuantity} <= 0" type="submit" id="addToCartBtn" class="btn mt-3 disabled">
-                                	<i class="bi-cart-fill me-1"></i>
-                                	<b>Out of Stock</b>
-                            	</button>
-                            </div>
-                            <button th:if="${product.stockQuantity} > 0" type="submit" id="addToCartBtn" class="mt-3">
-                                <i class="bi-cart-fill me-1"></i>
-                                <b>Add to cart</b>
-                            </button>
-                        </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="py-5">
-        	<h2 id="reviewTitle">Reviews</h2>
-        	<div class="py-3" id="reviewContainer">
-        		<div class="review-cards" th:each="review, iterstat : ${reviews}" th:if="${iterstat.index < 2}" th:object="${review}">
-        			<div id="reviewerInfo">
-        				<img src="/img/pfpplaceholder.jpg" id="reviewerPfp">
-        				<div id="reviewerInfoChild">
-               				<h6 th:text="*{reviewer.username}">username</h6>
-        					<h6 th:text="*{rating}">rating</h6>
-        				</div>
-        			</div>
-        			<div id="reviewComment" th:text="*{comment}">
-        				aaaaaaaaaaaaaaaaaaa
-        			</div>
-        		</div>
-        	</div>
-        	<div id="showReviewsContainer">
-        		<a th:href="@{/products/{productId}/reviews(productId=${product.Id})}" id="showAllLink">Show all</a>
-        	</div>
-        </section>
-        <section>
-        	<h2 id="leaveAReviewTitle">Leave a review</h2>
-        	<form method="POST" th:action="@{/products/{productId}/newReview(productId=${product.Id})}" th:object="${reviewDto}">
-	        	<div id="newReviewContainer">
-	        		<div id="ratingContainer">
-	        			<span style="color:white;"><i class="bi bi-star" id="star1"></i><i class="bi bi-star" id="star2"></i><i class="bi bi-star" id="star3"></i><i class="bi bi-star" id="star4"></i><i class="bi bi-star" id="star5"></i></span>
-	        			<input id="ratingInput" type="hidden" th:field="*{rating}">
-	        		</div>
-	        		<div id="commentContainer">
-	        			<textarea id="commentTextArea" th:field="*{comment}"></textarea>
-	        		</div>
-	        	</div>
-	        	<div id="postButtonDiv">
-	      			<button id="postButton" type="submit">Post review</button>
-	        	</div>
-        	</form>
-        </section>
-        <section class="py-5 bg-dark">
-            <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="fw-bolder mb-4" id="relatedProductsTitle">Related products</h2>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
-                    <div class="col mb-5" th:each=" product1, iterstat : ${products}" th:if="${product.id} != ${product1.id} and ${iterstat.index < 3}">
-                        <div class="card h-100" id="relatedProductCard">
-                            <img class="card-img-top" th:src="${product1.photoUrl}" alt="..." />
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <h5 class="fw-bolder" th:text="${product1.name}">Fancy Product</h5>
-                                    <span th:text="${product1.price}"></span><span>0 RSD</span>
-                                </div>
-                            </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{/products/{productId}(productId=${product1.id})}" id="showMoreBtn1">Show More</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+	<section class="py-5" th:object="${product}">
+		<div th:if="${param.success}" class="alert alert-primary"
+			id="successAlert">Added to cart!</div>
+		<div th:if="${param.invalidReview}" class="alert alert-danger"
+			id="reviewAlert">Invalid Review, check if all fields are filled
+			in properly!</div>
+		<div id="editProductDiv">
+			<a id="deleteProductLink"
+				th:href="@{/products/{productId}/delete(productId=${product.id})}"><button
+					type="button" class="btn btn-danger" id="deleteProductBtn"
+					sec:authorize="hasAuthority('ADMIN')" style="margin-right: 10px;">
+					<i class="bi bi-trash3-fill"></i>
+				</button></a> <a id="editProductLink"
+				th:href="@{/products/{productId}/edit(productId=${product.id})}"><button
+					type="button" class="btn btn-warning" id="editProductBtn"
+					sec:authorize="hasAuthority('ADMIN')" style="margin-right: 10px;">
+					<i class="bi bi-pencil-fill"></i>
+				</button></a>
+		</div>
+		<div class="container px-4 px-lg-5 my-3">
+			<div class="row gx-4 gx-lg-5 align-items-center">
+				<div class="col-md-6">
+					<img class="card-img-top mb-5 mb-md-0" th:src="*{photoUrl}"
+						alt="..." />
+				</div>
+				<div class="col-md-6">
+					<div class="small mb-1" style="color: white;">
+						<i class="bi bi-star-fill"></i> <span th:text="*{rating}"></span>
+					</div>
+					<h1 class="display-5 fw-bolder" th:text="*{name}" id="productName">Shop
+						item template</h1>
+					<div class="fs-5 mb-5">
+						<span th:text="*{price}" class="productPrice"></span><span
+							class="productPrice">0 RSD</span>
+					</div>
+					<p class="lead" id="productDescription">Lorem ipsum dolor sit
+						amet consectetur adipisicing elit. Praesentium at dolorem quidem
+						modi. Nam sequi consequatur obcaecati excepturi alias magni,
+						accusamus eius blanditiis delectus ipsam minima ea iste laborum
+						vero?</p>
+					<div class="d-flex">
+						<form method="POST"
+							th:action="@{/products/{productId}/addToCart(productId=${product.id})}"
+							th:object="${cartItem}">
+							<input class="form-control text-center me-3" id="productName"
+								name="productName" type="hidden"
+								style="max-width: 3rem; max-height: 3rem;"
+								th:field="*{productName}" th:value="${product.name}" /> <input
+								class="form-control text-center me-3" id="productId"
+								name="productId" type="hidden"
+								style="max-width: 3rem; max-height: 3rem;"
+								th:field="*{productId}" th:value="${product.id}" /> <input
+								class="form-control text-center me-3" id="price" name="price"
+								type="hidden" style="max-width: 3rem; max-height: 3rem;"
+								th:field="*{price}" th:value="${product.price}" /> <input
+								class="form-control text-center me-3" id="photoUrl"
+								name="photoUrl" type="hidden"
+								style="max-width: 3rem; max-height: 3rem;"
+								th:field="*{photoUrl}" th:value="${product.photoUrl}" /> <input
+								class="form-control text-center me-3" id="inputQuantity" min="1"
+								name="quantity" value="1" type="number"
+								style="max-width: 3rem; max-height: 3rem;"
+								th:field="*{quantity}" />
+							<div data-toggle="tooltip" data-placement=""
+								title="Out of stock!">
+								<button th:if="${product.stockQuantity} <= 0" type="submit"
+									id="addToCartBtn" class="btn mt-3 disabled">
+									<i class="bi-cart-fill me-1"></i> <b>Out of Stock</b>
+								</button>
+							</div>
+							<button th:if="${product.stockQuantity} > 0" type="submit"
+								id="addToCartBtn" class="mt-3">
+								<i class="bi-cart-fill me-1"></i> <b>Add to cart</b>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="py-5">
+		<h2 id="reviewTitle">Reviews</h2>
+		<div class="py-3" id="reviewContainer">
+			<div class="review-cards" th:each="review, iterstat : ${reviews}"
+				th:if="${iterstat.index < 2}" th:object="${review}">
+				<div id="reviewerInfo">
+					<img src="/img/pfpplaceholder.jpg" id="reviewerPfp">
+					<div id="reviewerInfoChild">
+						<h6 th:text="*{reviewer.username}">username</h6>
+						<span><i class="bi bi-star-fill"></i> </span><span
+							th:text="*{rating}"></span>
+					</div>
+				</div>
+				<div id="reviewComment" th:text="*{comment}">
+					aaaaaaaaaaaaaaaaaaa</div>
+			</div>
+		</div>
+		<div id="showReviewsContainer">
+			<a
+				th:href="@{/products/{productId}/reviews(productId=${product.Id})}"
+				id="showAllLink">Show all</a>
+		</div>
+	</section>
+	<section sec:authorize="isAuthenticated()">
+		<h2 id="leaveAReviewTitle">Leave a review</h2>
+		<form method="POST"
+			th:action="@{/products/{productId}/newReview(productId=${product.Id})}"
+			th:object="${reviewDto}">
+			<div id="newReviewContainer">
+				<div id="ratingContainer">
+					<span style="color: white;"><i class="bi bi-star" id="star1"></i><i
+						class="bi bi-star" id="star2"></i><i class="bi bi-star" id="star3"></i><i
+						class="bi bi-star" id="star4"></i><i class="bi bi-star" id="star5"></i></span>
+					<input id="ratingInput" type="hidden" th:field="*{rating}">
+				</div>
+				<div id="commentContainer">
+					<textarea id="commentTextArea" th:field="*{comment}"></textarea>
+				</div>
+			</div>
+			<div id="postButtonDiv">
+				<button id="postButton" type="submit">Post review</button>
+			</div>
+		</form>
+	</section>
+	<section class="py-5 bg-dark">
+		<div class="container px-4 px-lg-5 mt-5">
+			<h2 class="fw-bolder mb-4" id="relatedProductsTitle">Related
+				products</h2>
+			<div
+				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
+				<div class="col mb-5" th:each=" product1, iterstat : ${products}"
+					th:if="${product.id} != ${product1.id} and ${iterstat.index < 3}">
+					<div class="card h-100" id="relatedProductCard">
+						<img class="card-img-top" th:src="${product1.photoUrl}" alt="..." />
+						<div class="card-body p-4">
+							<div class="text-center">
+								<h5 class="fw-bolder" th:text="${product1.name}">Fancy
+									Product</h5>
+								<span th:text="${product1.price}"></span><span>0 RSD</span>
+							</div>
+						</div>
+						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+							<div class="text-center">
+								<a class="btn btn-outline-dark mt-auto"
+									th:href="@{/products/{productId}(productId=${product1.id})}"
+									id="showMoreBtn1">Show More</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<footer class="py-5 bg-dark">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
