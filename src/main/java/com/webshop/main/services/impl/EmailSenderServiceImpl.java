@@ -17,7 +17,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 	@Override
 	public void sendOrdererEmail(Order order) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("vukedd.aternos@gmail.com");
+		message.setFrom("example@mail.com");
 		message.setTo(order.getOrderer().getEmail());
 		StringBuffer sbItems = new StringBuffer();
 		for (OrderItem oi : order.getOrderItems()) {
@@ -46,8 +46,8 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 	@Override
 	public void sendSellerEmail(Order order) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("vukedd.aternos@gmail.com");
-		message.setTo("vukedd.aternos@gmail.com");
+		message.setFrom("example@mail.com");
+		message.setTo("example@mail.com");
 		StringBuffer sbItems = new StringBuffer();
 		for (OrderItem oi : order.getOrderItems()) {
 			sbItems.append(oi.getProductName() + "\n" + "Quantity: " + oi.getQuantity() + "\nPrice: " + oi.getPrice() + "0 RSD\n\n");
