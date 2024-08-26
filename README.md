@@ -18,6 +18,8 @@ Before running this application, ensure you have the following installed:
 ## How to run project
 - Clone project
 - Create webshop.sql, update application.properties with your db connection details
+- Create email for the gmail that u will use as a sender and set it in application.properties, and [generate app password]("https://youtu.be/lSURGX0JHbA?si=t7-FiJ7O61QamJUW")
+- Change the email sender in the EmailSenderService
 - Build the application
 - Run app
 - Access the application through localhost
