@@ -65,7 +65,7 @@ public class ReviewController {
 		product.setRating(rating);
 		productService.updateProduct(product);
 		
-		return "redirect:/products";
+		return "redirect:/products/" + product.getId() + "?successRev";
 	}
 	
 	@GetMapping("/products/{productId}/reviews")

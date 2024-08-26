@@ -77,6 +77,7 @@ public class ProductController {
 		model.addAttribute("cartItem", cartItem);
 		model.addAttribute("product", product);
 		model.addAttribute("products", products);
+		model.addAttribute("reviewSize", reviews.size());
 		model.addAttribute("reviewDto", new ReviewDto());
 		if (principal != null) {
 			UserEntity user = userService.findByEmail(principal.getName());

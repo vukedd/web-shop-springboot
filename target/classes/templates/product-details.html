@@ -81,6 +81,8 @@
 		<div th:if="${param.invalidReview}" class="alert alert-danger"
 			id="reviewAlert">Invalid Review, check if all fields are filled
 			in properly!</div>
+		<div th:if="${param.successRev}" class="alert alert-success"
+			id="reviewAlert">Review successfully posted!</div>
 		<div id="editProductDiv">
 			<a id="deleteProductLink"
 				th:href="@{/products/{productId}/delete(productId=${product.id})}"><button
@@ -101,7 +103,7 @@
 						alt="..." />
 				</div>
 				<div class="col-md-6">
-					<div class="small mb-1" style="color: white;">
+					<div class="small mb-1" style="color: white;" th:if="${reviewSize} > 0">
 						<i class="bi bi-star-fill"></i> <span th:text="*{rating}"></span>
 					</div>
 					<h1 class="display-5 fw-bolder" th:text="*{name}" id="productName">Shop
@@ -155,7 +157,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="py-5">
+	<section class="py-5" th:if="${reviewSize} > 0">
 		<h2 id="reviewTitle">Reviews</h2>
 		<div class="py-3" id="reviewContainer">
 			<div class="review-cards" th:each="review, iterstat : ${reviews}"
@@ -180,6 +182,7 @@
 	</section>
 	<section sec:authorize="isAuthenticated()">
 		<h2 id="leaveAReviewTitle">Leave a review</h2>
+		<p id="firstRev" th:if="${reviewSize} < 1">Be the first one to leave a review!</p>
 		<form method="POST"
 			th:action="@{/products/{productId}/newReview(productId=${product.Id})}"
 			th:object="${reviewDto}">

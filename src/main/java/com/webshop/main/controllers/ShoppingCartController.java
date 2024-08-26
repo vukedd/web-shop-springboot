@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,7 +72,10 @@ public class ShoppingCartController {
 	}
 	
 	@PostMapping("/cart/{cartId}/order")
-	public String placeOrder(@PathVariable("cartId") Long cartId, @Valid @ModelAttribute OrdererInfo orderer, Principal principal) {
+	public String placeOrder(@PathVariable("cartId") Long cartId, @Valid @ModelAttribute OrdererInfo orderer,BindingResult result ,Principal principal) {
+		if (result.hasErrors()) {
+			return "redirect:/cart?fail";
+		}
 		ShoppingCart cart = cartService.findShoppingCartById(cartId);
 		UserEntity user = userService.findByEmail(principal.getName());
 		Order order = new Order();
