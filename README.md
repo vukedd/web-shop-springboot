@@ -13,7 +13,7 @@
 Before running this application, ensure you have the following installed:
 - [Java 17](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
 - [Maven 3.8+](https://maven.apache.org/install.html)
-- [MySQL] (https://dev.mysql.com/downloads/installer/)
+- [MySQL](https://dev.mysql.com/downloads/installer/)
 
 ## How to run project
 - Clone project
